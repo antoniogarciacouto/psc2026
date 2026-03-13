@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projetos 2026 — Polo Sociocultural Sesc Paraty</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   PORTFOLIO PSC 2026
+   Identidade clara, institucional, vibrante
+   ═══════════════════════════════════════ */
+
+:root {
+  --bg: #faf8f5;
+  --bg-warm: #f3efe9;
+  --bg-card: #ffffff;
+  --text: #1a1715;
+  --text-secondary: #6b6560;
+  --text-muted: #9e9690;
+  --border: rgba(26,23,21,0.08);
+  --border-hover: rgba(26,23,21,0.18);
+  --accent: #c2420c;
+  --accent-light: #fef0ea;
+
+  /* Cores por área cultural */
+  --cor-artes-cenicas: #e85d3a;
+  --cor-artes-visuais: #7c3aed;
+  --cor-musica: #0891b2;
+  --cor-literatura: #b45309;
+  --cor-memoria: #15803d;
+  --cor-audiovisual: #4338ca;
+  --cor-arte-educacao: #c026d3;
+  --cor-esportivo: #dc2626;
+  --cor-educacao: #0d9488;
+  --cor-inovacao: #6366f1;
+  --cor-turismo: #059669;
+  --cor-default: #64748b;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.04);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding: 80px 64px 72px;
+  background: linear-gradient(165deg, #1a1715 0%, #2d2520 40%, #3d2e1f 100%);
+  color: #faf8f5;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(194,66,12,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(250,248,245,0.5);
+  font-weight: 500;
+  margin-bottom: 20px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 1;
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 400;
+  line-height: 1.08;
+  margin-bottom: 20px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: #e8a87c;
+}
+
+.hero-sub {
+  position: relative;
+  z-index: 1;
+  font-size: 17px;
+  color: rgba(250,248,245,0.6);
+  font-weight: 300;
+  max-width: 560px;
+  line-height: 1.7;
+  animation: fadeUp 0.6s 0.35s ease both;
+}
+
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(250,248,245,0.1);
+  animation: fadeUp 0.6s 0.5s ease both;
+}
+
+.hero-stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  color: #e8a87c;
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(250,248,245,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+
+/* ── NAVIGATION / FILTERS ── */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,248,245,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-bar::-webkit-scrollbar { display: none; }
+
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.nav-pill:hover { color: var(--text); }
+
+.nav-pill.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.nav-pill .pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nav-pill .pill-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ── SECTION: AREA HIGHLIGHTS ── */
+.section {
+  padding: 56px 64px;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+
+/* ── UNIT TOGGLE ── */
+.unit-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-warm);
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 32px;
+  width: fit-content;
+}
+
+.unit-btn {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.unit-btn.active {
+  background: var(--bg-card);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* ── GRID ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* ── PROJECT CARD ── */
+.project-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: var(--transition);
+  animation: fadeUp 0.5s ease both;
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+}
+
+.card-visual {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-visual img.card-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .card-cover {
+  transform: scale(1.05);
+}
+
+.card-visual .visual-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+}
+
+.card-visual .visual-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 48px;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+}
+
+.card-visual .visual-area-label {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  z-index: 3;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.card-visual .visual-unit-badge {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 3;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.card-body {
+  padding: 20px 20px 24px;
+}
+
+.card-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.card-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.card-meta-item svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+}
+
+.card-meta-item strong {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(26,23,21,0.5);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 24px;
+  overflow-y: auto;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border-radius: 16px;
+  max-width: 720px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+  animation: modalIn 0.35s ease;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-visual {
+  height: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-visual .card-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.modal-visual .visual-icon { font-size: 64px; position: relative; z-index: 1; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.2)); }
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.modal-close:hover { background: rgba(0,0,0,0.45); }
+
+.modal-body {
+  padding: 32px 36px 40px;
+}
+
+.modal-area-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.modal-area-tag {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: white;
+}
+
+.modal-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 30px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.modal-unit {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.modal-section-title {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 24px;
+}
+
+.modal-text {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.modal-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--bg-warm);
+  border-radius: var(--radius-sm);
+}
+
+.modal-stat {
+  text-align: center;
+  flex: 1;
+}
+
+.modal-stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px;
+  color: var(--text);
+}
+
+.modal-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+.modal-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.modal-service-tag {
+  font-size: 12px;
+  padding: 5px 12px;
+  background: var(--bg-warm);
+  border-radius: 20px;
+  color: var(--text-secondary);
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  padding: 48px 64px;
+  background: #1a1715;
+  color: rgba(250,248,245,0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  max-width: 320px;
+}
+
+.footer-brand-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  color: rgba(250,248,245,0.85);
+  margin-bottom: 10px;
+}
+
+.footer-brand-desc {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+}
+
+.footer-link {
+  font-size: 13px;
+  color: rgba(250,248,245,0.5);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-link:hover { color: rgba(250,248,245,0.85); }
+
+.footer-copy {
+  width: 100%;
+  padding-top: 24px;
+  margin-top: 24px;
+  border-top: 1px solid rgba(250,248,245,0.08);
+  font-size: 11px;
+  color: rgba(250,248,245,0.3);
+  text-align: center;
+}
+
+/* ── SEARCH ── */
+.search-wrap {
+  margin-bottom: 28px;
+  position: relative;
+  max-width: 400px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text);
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 3px rgba(194,66,12,0.06);
+}
+
+.search-input::placeholder { color: var(--text-muted); }
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--text-muted);
+}
+
+.empty-state-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.4; }
+.empty-state-text { font-size: 15px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { padding: 56px 32px 48px; }
+  .nav-bar { padding: 0 24px; }
+  .section { padding: 40px 24px; }
+  .site-footer { padding: 36px 24px; }
+  .hero-stats { gap: 28px; flex-wrap: wrap; }
+  .projects-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .modal-body { padding: 24px 24px 32px; }
+}
+
+@media (max-width: 520px) {
+  .hero { padding: 40px 20px 36px; }
+  .nav-bar { padding: 0 16px; }
+  .section { padding: 32px 16px; }
+  .site-footer { padding: 28px 16px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .card-visual { height: 150px; }
+  .modal-content { border-radius: 12px; }
+  .modal-visual { height: 160px; }
+  .modal-stats { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="hero-eyebrow">Sesc · Polo Sociocultural · Paraty, RJ</div>
+  <h1 class="hero-title">Projetos <em>2026</em></h1>
+  <p class="hero-sub">Cultura, patrimônio, educação e território. Conheça os projetos do Polo Sociocultural Sesc Paraty nas unidades Caborê e Santa Rita.</p>
+  <div class="hero-stats" id="heroStats"></div>
+</header>
+
+<!-- ═══ NAV / FILTERS ═══ -->
+<nav class="nav-bar" id="navBar"></nav>
+
+<!-- ═══ CONTENT ═══ -->
+<main class="section">
+  <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap; margin-bottom:8px;">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input class="search-input" type="text" id="searchInput" placeholder="Buscar projeto...">
+    </div>
+    <div class="unit-toggle" id="unitToggle">
+      <button class="unit-btn active" data-unit="todas">Todas</button>
+      <button class="unit-btn" data-unit="CABORÊ">Caborê</button>
+      <button class="unit-btn" data-unit="SANTA RITA">Santa Rita</button>
+    </div>
+  </div>
+  <div class="projects-grid" id="projectsGrid"></div>
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <div class="empty-state-icon">🔍</div>
+    <div class="empty-state-text">Nenhum projeto encontrado com esses filtros.</div>
+  </div>
+</main>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <div class="footer-brand-name">Polo Sociocultural Sesc Paraty</div>
+    <div class="footer-brand-desc">Cultura, patrimônio, educação e território em diálogo com as comunidades de Paraty.</div>
+  </div>
+  <div class="footer-links">
+    <a class="footer-link" href="https://www.instagram.com/sescparaty/" target="_blank">Instagram</a>
+    <a class="footer-link" href="https://www.youtube.com/@SescParaty/videos" target="_blank">YouTube</a>
+    <a class="footer-link" href="https://www.facebook.com/sescparaty/?locale=pt_BR" target="_blank">Facebook</a>
+  </div>
+  <div class="footer-copy">Polo Sociocultural Sesc Paraty · Caborê · Santa Rita · 2026</div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+const PROJETOS = [{"id": "1951", "n": "ARTE DA PALAVRA - PSC", "d": "O projeto é constituído por ações formativas e de fruição literária, voltado para alunos da rede pública e interessados em leitura. Foi criado, em 2017, pelo Departamento Nacional dentro do PAP - Plano de Ações Prioritárias. É composto pelas seguintes realizações:Circuito de Autores – circuito...", "o": "Circuito de Criação Literária:Estimular a criação literária e a formação de novos escritores por meio da realização de oficinas do projeto Arte da Palavra, promovendo o acesso à literatura como ferramenta de expressão e desenvolvimento pessoal entre...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Oficina"], "tp": 375, "ts": 9, "or": 128600.0}, {"id": "2244", "n": "ARTES VISUAIS - EXPOSIÇÕES CABORÊ", "d": "Realização de três exposições com propostas acessíveis e acolhedoras que valorizam a diversidade de vozes e práticas das artes visuais contemporâneas, especialmente aquelas que exploram as relações entre ciência e paisagem. Voltadas prioritariamente aos comerciários de Paraty e seus dependentes, as...", "o": "Oferecer à população de Paraty experiências expositivas diversificadas e acessíveis nos espaços do Sesc Caborê, promovendo o contato com diferentes linguagens das artes visuais e fortalecendo a dimensão educativa da visitação.", "u": "CABORÊ", "a": ["Artes Visuais"], "st": ["Exposição"], "tp": 10000, "ts": 2, "or": 848200.0}, {"id": "2258", "n": "ARTES VISUAIS - FORMAÇÃO E PESQUISA", "d": "O projeto Formação e Pesquisa em Artes Visuais do Sesc Paraty promove a fruição e a produção artística para diferentes públicos, articulando formação, pesquisa e vivências. Por meio de cursos de desenho, cerâmica e bordado, oficinas vinculadas a exposições, Ateliê Aberto e residências artísticas, o...", "o": "Fomentar a pesquisa e a formação continuada no campo das Artes Visuais, reconhecendo o papel transformador da cultura na construção de uma sociedade mais justa, igualitária e sustentável. Essa diretriz fortalece o compromisso do Sesc com a...", "u": "CABORÊ", "a": ["Artes Visuais"], "st": ["Curso", "Exposição", "Oficina", "Palestra", "Residência artística"], "tp": 1380, "ts": 20, "or": 512520.0}, {"id": "2861", "n": "AÇÕES FORMATIVAS EM MÚSICA", "d": "A programação de cursos de música do Sesc Caborê para 2026 visa a iniciação musical, atraindo diversos públicos. Pensada também como uma oportunidade de bem-estar, expressão e lazer para os trabalhadores do comércio e seus familiares, a programação oferece cursos introdutórios que não exigem...", "o": "GERAL: O projeto de cursos de música do Sesc Caborê para 2026 tem como objetivo promover a iniciação musical e atrair diversos públicos. A proposta é oferecer cursos que não exigem experiência prévia, proporcionando uma introdução ao universo...", "u": "CABORÊ", "a": ["Música"], "st": ["Curso", "Oficina"], "tp": 165, "ts": 30, "or": 637200.0}, {"id": "2362", "n": "CASA DO PATRIMÔNIO", "d": "A Casa do Patrimônio de Paraty atua na preservação, salvaguarda e difusão do patrimônio cultural, em diálogo direto com o território. Estruturado a partir de ações compartilhadas de formação, mediação cultural e educação patrimonial, o projeto promove o reconhecimento e a valorização das múltiplas...", "o": "Desenvolver ações formativas e mediadas a partir de parcerias estratégicas com instituições do campo do patrimônio e da cultura, fortalecendo a atuação territorial do Polo Sociocultural Sesc Paraty e ampliando o acesso da clientela preferencial a...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição", "Oficina", "Palestra"], "tp": 37550, "ts": 47, "or": 891400.0}, {"id": "2286", "n": "CINE SESC 2026", "d": "O Cine Sesc integra as ações do Polo Sociocultural Sesc Paraty, promovendo o acesso à linguagem audiovisual por meio de exibições de filmes, mediação cultural e atividades arte-educativas. Voltado à formação de públicos e à valorização do cinema como expressão artística, o projeto tem como...", "o": "Ampliar o acesso à linguagem audiovisual por meio de uma programação contínua de cinema, promovendo a formação de público, a reflexão crítica e a valorização da diversidade estética. O projeto tem como foco os trabalhadores do comércio de bens,...", "u": "SANTA RITA", "a": ["Audiovisual"], "st": ["Debate", "Exibição"], "tp": 2525, "ts": 179, "or": 84296.0}, {"id": "2293", "n": "CINE SESC MIRIM 2026", "d": "Cine Sesc Mirim é um projeto voltado à formação cultural de crianças e adolescentes por meio de sessões de cinema com mediação e atividades arte-educativas. De agosto a novembro de 2026, realizará sessões mensais em espaços externos e na Unidade Santa Rita, ativando filmes do acervo Cine Sesc 2026...", "o": "Promover a formação cultural de crianças e adolescentes por meio da exibição de filmes infanto-juvenis com mediação e atividades arte-educativas, ampliando o acesso ao cinema e à reflexão crítica em territórios com pouca oferta de equipamentos...", "u": "SANTA RITA", "a": ["Audiovisual"], "st": ["Exibição", "Mediação", "Oficina"], "tp": 860, "ts": 35, "or": 96774.0}, {"id": "2114", "n": "CIRCOLADÔ", "d": "Circoladô é uma ação formativa para crianças e jovens, especialmente dependentes de comerciários, que utiliza o circo social para estimular criatividade, expressão corporal, coordenação, concentração e trabalho em equipe. Promove aprendizagem lúdica e desenvolvimento social, emocional e cognitivo,...", "o": "Desenvolver habilidades de expressão, coordenação motora, concentração e imaginação entre crianças e jovens por meio de oficinas de circo social, promovendo o lúdico e a convivência em grupo, com foco na inclusão da clientela preferencial.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Circo", "Curso - Circo"], "tp": 2560, "ts": 8, "or": 233820.0}, {"id": "1697", "n": "CIRCUITO SESC DE CORRIDAS - PARATY 2026", "d": "A Etapa Paraty do Circuito Sesc de Corridas integra o projeto nacional do Sesc que padroniza e qualifica provas de corrida em todo o país. Com identidade visual unificada e diretrizes comuns, respeita as particularidades locais. Em Paraty, a prova valoriza o contexto histórico, cultural e natural...", "o": "Realizar a etapa local do Circuito Sesc de Corridas, promovendo a participação ativa da comunidade em evento esportivo de grande alcance, com foco na clientela preferencial e na prática segura de atividade física.", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2076", "n": "CLUBE DA CORRIDA", "d": "O Clube de Corrida do Sesc Caborê – Paraty é uma iniciativa voltada à promoção da atividade física regular por meio da prática orientada da corrida de rua. A proposta é oferecer encontros semanais com acompanhamento profissional, estímulo à participação em eventos esportivos e ações educativas...", "o": "Implantar e manter um Clube de Corrida no Sesc Caborê, oferecendo à população de Paraty uma oportunidade contínua e acessível de prática orientada de corrida e caminhada, contribuindo para a melhoria da qualidade de vida, o fortalecimento de...", "u": "CABORÊ", "a": ["Desenvolvimento Físico-Esportivo"], "st": [], "tp": 40, "ts": 2, "or": 179800.0}, {"id": "1953", "n": "CLUBE SESC DE LEITORES", "d": "O Clube Sesc de Leitores, ação regular desde 2018, promove o hábito cotidiano da leitura, destacando que não há escrita sem leitura. Em 2026, realizará cinco ciclos de três semanas, com encontros semanais e participação do/a autor/a no encerramento. A curadoria seguirá conectada ao contexto...", "o": "O objetivo central é formar novos leitores, principalmente dentro do nosso público preferencial, e ampliar o repertório crítico dos participantes, promovendo a leitura como prática cultural e ferramenta de pertencimento. Para isso, o projeto realiza...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Debate", "Mediação"], "tp": 5375, "ts": 495, "or": 315390.0}, {"id": "1927", "n": "CRIAR SESC I - ANOS INICIAIS DO ENSINO FUNDAMENTAL", "d": "Trata-se da implementação do Projeto Criar Sesc I para atendimento, em contraturno escolar, de crianças matriculadas no primeiro segmento do Ensino Fundamental de escolas públicas ou privadas da região, preferencialmente do público do PCG – Programa de Comprometimento e Gratuidade. O Projeto Criar...", "o": "Objetivo geral:Oferecer para a comunidade do Caborê e entornos, a crianças matriculadas nos anos iniciais do Ensino Fundamental em contraturno escolar, oportunidades de vivenciar experiências de educação integral que considerem as diferentes...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2093", "n": "DANÇAS LIVRES", "d": "Danças Livres é uma ação formativa regular voltada ao público preferencial do Sesc, com foco na promoção da qualidade de vida e do bem-estar físico e emocional por meio da expressão corporal. Com metodologia baseada na consciência corporal e no movimento espontâneo, a atividade valoriza o...", "o": "Promover o bem-estar físico e emocional dos participantes por meio de práticas regulares de dança, estimulando a criatividade corporal, o autoconhecimento e a integração entre os participantes, com atenção à inclusão de trabalhadores do comércio.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Curso - Dança"], "tp": 330, "ts": 2, "or": 167020.0}, {"id": "2043", "n": "DANÇAS SOCIAIS", "d": "Danças Sociais é uma atividade formativa regular voltada ao público preferencial do Sesc – trabalhadores do comércio de bens, serviços e turismo e seus dependentes. A proposta contempla a vivência de danças sociais brasileiras, como samba de gafieira, forró, maxixe, lambada e danças...", "o": "Geral: Mobilizar e formar o público preferencial do Sesc por meio de atividades regulares em danças sociais brasileiras, promovendo a socialização, o bem-estar e a valorização cultural.Específicos:Estimular o convívio e a interação entre...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Curso - Dança"], "tp": 1290, "ts": 5, "or": 172370.0}, {"id": "2120", "n": "DECANTO DE DANÇA", "d": "Decanto de Dança incentiva o contato com a dança valorizando o corpo integrado ao espaço e à identidade cultural de Paraty. Foca nas performances tradicionais e memórias locais, promovendo conexão com expressões regionais e ampliando a compreensão do corpo como símbolo cultural e histórico,...", "o": "Fomentar as expressões corporais negras e indígenas da localidade por meio da realização de ações artísticas, formações e apresentações públicas, promovendo a valorização das corporeidades plurais e a ampliação do repertório estético do público...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Desenvolvimento de experimentações - Dança", "Intercâmbio - Dança"], "tp": 550, "ts": 11, "or": 234700.0}, {"id": "2173", "n": "DIÁLOGOS EM PRODUÇÃO CULTURAL", "d": "Diálogos em Produção Cultural é um projeto formativo, em formato de rodas de conversa, voltado a agentes culturais de Paraty e trabalhadores do comércio cultural de Paraty, com o objetivo de promover reflexões sobre gestão cultural em uma localidade com caráter turístico. A iniciativa realiza...", "o": "Objetivo Geral: Promover o fortalecimento da atuação de trabalhadores do comércio, produtores e agentes culturais de Paraty por meio de encontros dialógicos que estimulem a troca de experiências, o compartilhamento de estratégias de gestão cultural...", "u": "SANTA RITA", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2359", "n": "EDUCAÇÃO PATRIMONIAL E TURISMO SOCIAL", "d": "O projeto Educação Patrimonial e Turismo Social é uma iniciativa que transforma o patrimônio cultural e a biodiversidade de Paraty em experiências educativas e turísticas que promovem pertencimento, inclusão e uso sustentável do território. Em 2026, o projeto conecta os resultados dos levantamentos...", "o": "Desdobrar e ações efetivas os conhecimentos culturais e ambientais sistematizados no ciclo Levantes Daqui em roteiros sustentáveis, processos formativos e vivências mediadas voltadas ao turismo social e à educação patrimonial, promovendo o...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural", "Turismo Social"], "st": ["Cartografia Social", "Curso", "Inventário Participativo", "Passeios - Receptivo", "Vivência"], "tp": 1215, "ts": 41, "or": 559500.0}, {"id": "1952", "n": "ESPAÇO CRIATIVO MAKER", "d": "Implantação do Espaço Criativo Maker da Unidade Sesc Caborê - Av. Otávio Gama, 1709 - Caborê em Paraty/RJ incluindo a aquisição de equipamentos, materiais e a oferta de atividades.", "o": "Objetivo geral: Implantar gradualmente o espaço maker, permitindo ajustes e integração progressiva dos recursos ao território desmistificando o uso do espaço por inteiro.Objetivos Específicos:•\tDefinir layout do espaço e organização do espaço...", "u": "CABORÊ", "a": ["Educação Ampliada"], "st": ["Oficina"], "tp": 50, "ts": 2, "or": 280000.0}, {"id": "2862", "n": "ESTÚDIO CABORÊ", "d": "A partir de 2026, o Sesc Caborê contará com um estúdio de música integrado à sua estrutura. Neste primeiro ano de funcionamento, a proposta é explorar o potencial desse novo espaço como ferramenta de apoio e complementação das atividades já existentes na programação do Polo.Com base em um...", "o": "GERAL: Implementar e operar um estúdio de gravação no Sesc Caborê, com foco na produção de conteúdos que fortaleçam, documentem e ampliem o alcance da programação e das ações desenvolvidas pela unidade.OBJETIVOS ESPECÍFICOS:Registrar e documentar...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2297", "n": "EXERCÍCIOS REGULARES", "d": "O projeto visa implantar regularmente as atividades de Alongamento, Yoga e Pilates Solo no Sesc Caborê, em Paraty, a partir de 2026. As práticas serão oferecidas como parte da programação permanente da unidade, com foco na promoção do bem-estar. As aulas ocorrerão em espaço reservado com estrutura...", "o": "Oferecer à comunidade de Paraty oportunidades regulares de participação em atividades físicas orientadas, por meio das modalidades de Alongamento, Yoga e Pilates Solo, promovendo saúde, bem-estar e qualidade de vida, alinhadas à missão educativa e...", "u": "CABORÊ", "a": ["Desenvolvimento Físico-Esportivo"], "st": [], "tp": 120, "ts": 6, "or": 244250.0}, {"id": "2356", "n": "FAZERES DAQUI", "d": "O Fazeres Daqui é um projeto que reafirma o compromisso do Sesc com a preservação e a valorização do patrimônio cultural como direito, linguagem e recurso estratégico para a construção de identidades, pertencimento e cidadania. Inserido no ciclo de Memória Social e Patrimônio, o projeto atua como...", "o": "Desdobramento  dos levantamentos e registros realizados pelo Levantes Daqui em experiências culturais, educativas e sensoriais que aproximem trabalhadores do comércio, seus dependentes e comunidades locais da preservação e valorização do patrimônio...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição", "Oficina", "Vivência"], "tp": 30550, "ts": 22, "or": 898700.0}, {"id": "2070", "n": "HUB CONECTA IMPACTA - POLOS – ESPAÇO DE EXPERIMETAÇÃO E PROTOTIPAGEM DO ECOSSISTEMA SESC DE INOVAÇÃO", "d": "O Conecta Integra Polos é uma iniciativa estratégica do Departamento Nacional do Sesc que visa integrar os três polos de referência em uma rede colaborativa, fortalecendo a troca de conhecimentos, a experimentação conjunta e a aplicação das melhores práticas institucionais. Por meio de encontros...", "o": "Geral: Integrar os polos de referência do Departamento Nacional em uma rede colaborativa que favoreça a experimentação, a inovação e o compartilhamento de metodologias e protocolos.Específicos:Criar um calendário anual de encontros técnicos e...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2350", "n": "LEVANTES DAQUI", "d": "O Levantes Daqui valoriza o patrimônio cultural de Paraty como vetor de desenvolvimento econômico, turístico e social. Por meio de inventário participativo, registros etnográficos, ações formativas e mediadas, o projeto promove a preservação, circulação e continuidade de saberes tradicionais,...", "o": "O objetivo do Levantes Daqui é valorizar, registrar e mobilizar o patrimônio cultural de Paraty por meio de ações participativas, inventário, pesquisa e formação, fortalecendo a identidade territorial e promovendo a preservação e circulação de...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Cartografia Social", "Debate", "Inventário Participativo", "Mediação", "Oficina", "Palestra", "Roda de Conversa", "Vivência"], "tp": 2930, "ts": 84, "or": 502069.16}, {"id": "2196", "n": "MINHA MÚSICA", "d": "O projeto “Minha Música” promove a diversidade musical em Paraty, destacando as histórias pessoais e afetivas que se conectam à música no cotidiano da cidade. A iniciativa investiga a relação entre música e a vida dos trabalhadores do comércio local, registrando suas memórias e experiências em uma...", "o": "O objetivo geral do projeto Minha Música é promover a valorização das histórias e memórias musicais dos trabalhadores do comércio, serviços e turismo de Paraty, por meio da criação de um acervo audiovisual e de audições musicais que fortaleçam a...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação", "Palestra"], "tp": 400, "ts": 10, "or": 182000.0}, {"id": "2365", "n": "MUTUÁ  EM AÇÕES", "d": "Realizado bienalmente no Polo Sociocultural Sesc Paraty, o Festival Mutuá promove cultura, patrimônio e artes em diálogo com o território de Paraty. Entre uma edição e outra, o Sesc desenvolve o Mutuá em Ações, por meio de atividades regulares com a comunidade, envolvendo diversas linguagens...", "o": "Valorizar as identidades culturais locais, fomentando a diversidade, a inclusão e o diálogo entre diferentes expressões artísticas. Estimular a formação e o intercâmbio entre artistas, agentes culturais, comunidade e equipes dos Departamentos...", "u": "CABORÊ", "a": ["Arte Educação", "Artes Cênicas", "Artes Visuais", "Literatura", "Memória Social e Patrimônio Cultural", "Música"], "st": ["Oficina", "Oficina - Dança", "Oficina - Escrita literária", "Palestra"], "tp": 890, "ts": 31, "or": 405080.0}, {"id": "2311", "n": "NA REAL 2026", "d": "O projeto Na Real 2026, será desenvolvido pelo Polo Sociocultural (PSC) e Trabalho Social com Grupos (TSG), visa fomentar ações criadas por e para jovens, por meio de um percurso formativo que combina oficinas e conteúdos teórico com vivências práticas no território. As temáticas principais a serem...", "o": "Promover percursos formativos voltados às juventudes de Paraty, articulando saberes territoriais, cultura digital, empreendedorismo e inovação social, com foco no fortalecimento da autonomia, do protagonismo juvenil e da inclusão da clientela...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2011", "n": "PALCO GIRATÓRIO - RESIDÊNCIAS ARTÍSTICAS", "d": "Na 28ª edição, o Palco Giratório é o maior e mais longevo projeto nacional de circulação de espetáculos em Artes Cênicas. Nesta edição promove residências artísticas com foco em territórios de baixa renda e vulnerabilidade social, para fortalecer a acessibilidade cultural, prioritariamente ao...", "o": "Fortalecer a difusão das artes cênicas e o intercâmbio cultural entre artistas e comunidades por meio da participação do PSC no Circuito Nacional Palco Giratório, promovendo o acesso da população local a espetáculos e ações formativas de qualidade.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Residência artística - Dança"], "tp": 330, "ts": 2, "or": 405156.0}, {"id": "2095", "n": "PLAYGROUND -TERRITÓRIO BRINCANTE", "d": "Projeto que prevê a instalação de brinquedos e ambientação paisagística em área externa, na Unidade do Sesc Caborê. A proposta tem como conceito estruturante a ideia de espaços naturalizados, que se traduzem na criação de ambientes lúdicos compostos por elementos como madeira, areia, água,...", "o": "Instalar os módulos de brinquedos integrados a um projeto de ambientação e paisagismo que valorize a natureza local e componha um espaço de brincar coerente com a proposta educativa e socioambiental da unidade. O cumprimento desse objetivo se fará...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "1957", "n": "RESIDÊNCIA LITERÁRIA", "d": "O projeto Residência Literária se constitui em duas frentes: a escolha de um autor/autora para residir em Paraty durante três meses visando finalizar um projeto literário. Em contrapartida, o autor/autora escolhido/a oferecerá uma oficina de escrita criativa, no Polo Sociocultural, para moradores...", "o": "Apoiar a produção de autores brasileiros e promover o intercâmbio literário entre escritores e leitores por meio de residências em Paraty, articulando práticas de criação, mediação e formação leitora com a realidade sociocultural do território.", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Oficina - Escrita literária"], "tp": 25, "ts": 1, "or": 91600.0}, {"id": "2367", "n": "ROTAS DA MEMÓRIA - 80 ANOS SESC", "d": "A exposição integra as celebrações dos 80 anos do Sesc, destacando o comércio como espaço de encontros, trocas e construção coletiva. Mais do que a circulação de mercadorias, o comércio carrega histórias de convivência, saberes e afetos, conectando culturas e modos de vida. Partindo de Paraty como...", "o": "Valorizar e difundir a memória social ligada ao comércio em Paraty através de uma exposição, destacando-o como espaço de encontros, trocas e construção coletiva de saberes, culturas e afetos. A proposta busca aproximar a clientela preferencial do...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição"], "tp": 25000, "ts": 1, "or": 876424.0}, {"id": "1910", "n": "SESC EAD EJA IMPLANTAÇÃO E ACOMPANHAMENTO", "d": "Implantação e oferta do Projeto Sesc EAD EJA, ensino médio da educação de jovens e adultos integrado a qualificação profissional em Produtor Cultural, na modalidade a distância na Unidade Sesc Caborê - Polo Sociocultural Sesc Paraty.", "o": "Ofertar o Ensino Médio da educação de jovens e adultos integrado à Educação Profissional, na modalidade EAD, seguindo o programa nacional conforme oferta do Departamento Nacional do Sesc e implantar o polo Sesc EAD Ensino Médio integrada à...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2227", "n": "SESC LABMAIS - LABORATÓRIO SESC DE ARTES, MÍDIAS, TECNOLOGIAS E JUVENTUDES", "d": "O projeto configura-se como um espaço educativo e cultural do Sesc Paraty voltado a jovens trabalhadores do comércio de bens, serviços e turismo, e comunidades em situação de vulnerabilidade social. Promove o protagonismo juvenil por meio de ações formativas em arte, cultura e novas mídias, com...", "o": "Proporcionar às juventudes, especialmente aos jovens trabalhadores do comércio, bens, serviços e turismo, processos formativos, experiências criativas e sensibilização artística, promovendo a cultura digital, a difusão e a produção cultural como...", "u": "CABORÊ", "a": ["Arte Educação"], "st": ["Curso", "Oficina", "Palestra"], "tp": 480, "ts": 18, "or": 533448.0}, {"id": "2335", "n": "SESC MEDIAÇÕES 2026", "d": "Sesc Mediações 2026 promove ações de mediação cultural comunitária, ampliando o acesso e mobilizando públicos por meio de visitas mediadas, rodas de conversa, articulação territorial e oferta de traslado e alimentação. A acessibilidade é transversal, com Libras, audiodescrição, legendagem e ações...", "o": "Desenvolver ações de arte-educação em diálogo com as demais áreas que compõem o Programa Cultura, por meio de processos de mediação cultural e mobilização de públicos, com foco nos públicos prioritários do Sesc — como trabalhadores do comércio de...", "u": "CABORÊ", "a": ["Arte Educação"], "st": ["Mediação"], "tp": 750, "ts": 30, "or": 68463.64}, {"id": "2001", "n": "SESC NA FLIP", "d": "O projeto \"Sesc Paraty na FLIP 2026\" tem como propósito reafirmar o papel do Sesc no cenário cultural nacional, fortalecer a economia criativa local e ampliar o acesso à cultura por meio de uma programação diversa, acessível e conectada com os desafios contemporâneos. Com ações como Cafés...", "o": "O projeto tem como objetivo consolidar a presença do Sesc no cenário cultural nacional, fortalecendo o Polo Sociocultural Sesc Paraty como centro de referência em literatura, artes e formação cidadã. A atuação do Sesc reafirma seu compromisso com a...", "u": "SANTA RITA", "a": ["Literatura", "Música"], "st": ["Apresentação", "Mediação", "Oficina", "Palestra"], "tp": 510, "ts": 34, "or": 509543.06}, {"id": "2292", "n": "SONORA BRASIL 2026", "d": "O Sonora Brasil, na sua 28ª edição, é um dos maiores e mais longevos projetos de circulação musical em âmbito nacional, proporcionando a fruição, a criação e o intercâmbio entre artistas e público em apresentações musicais e ações educativas que difundem diversos gêneros e estilos, praticados em...", "o": "GERAL: Fruição musical através de um projeto com identidade nacional e gestão compartilhada que promove a diversidade cultural brasileira.  ESPECÌFICOS:- Apresentar as mais diversas manifestações culturais do país por meio de programas inéditos e...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação", "Oficina"], "tp": 1060, "ts": 8, "or": 420222.0}, {"id": "2157", "n": "TEATRALIDADES", "d": "A ação de incentivo a produção e fruição artística local em teatro, dança, circo, performance e formas animadas, voltada a diferentes faixas etárias. Com programação regular, contribui para a formação de público da nova unidade Sesc Caborê, priorizando trabalhadores do comércio, bens e turismo....", "o": "Promover o acesso à cultura por meio do incentivo à produção e fruição artística local, contribuindo para a formação de público da unidade Sesc Caborê, com foco nos trabalhadores do comércio, bens e turismo e em diferentes faixas etárias da...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Teatro", "Intercâmbio - Teatro"], "tp": 940, "ts": 12, "or": 454370.0}, {"id": "1675", "n": "TERRITÓRIOS DO PENSAR", "d": "O projeto Territórios do Pensar tem como objetivo fortalecer o diálogo com as comunidades, entendendo o Sesc como parte ativa da realidade social e cultural do Brasil. Para isso, promove debates, oficinas, atividades artísticas e ações voltadas à valorização da memória local. A proposta é ampliar...", "o": "Fortalecer o diálogo entre literatura, filosofia e território por meio de ciclos de leitura, encontros com autores e atividades formativas, com foco em estudantes da rede pública e dependentes da clientela preferencial, estimulando o pensamento...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Apresentação", "Mediação", "Oficina"], "tp": 2408, "ts": 27, "or": 386660.0}, {"id": "2183", "n": "TODA MÚSICA", "d": "O projeto cultural Toda Música, desenvolvido em Paraty, tem como objetivo promover a formação artística e a ampliação do público local, com ênfase na linguagem musical. A iniciativa busca fortalecer a participação da comunidade estabelecendo vínculos entre os moradores e as apresentações musicais....", "o": "OBJETIVO GERAL A programação em música do Polo Sociocultural Sesc Paraty visa contribuir para o desenvolvimento da cena cultural da cidade de Paraty por meio da oferta de programação sistemática e diversa, no campo da música, direcionada à população...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação"], "tp": 300, "ts": 6, "or": 147046.15}, {"id": "2162", "n": "VOZES DA MEMÓRIA", "d": "Vozes da Memória é uma atividade formativa de Trabalho Social com Pessoas Idosas (TSPI), em parceria com a Gerência de Assistência (GEA), no formato transdiciplinar para desenvolvimento de ações formativas e de fruição para público 60+, na linguagem de Artes Cênicas. Promove convívio social,...", "o": "Promover o convívio social e a valorização da maturidade por meio de ações artísticas transdisciplinares voltadas a pessoas idosas, integrando linguagens artísticas com foco no bem-estar, na autoestima e na valorização da memória e patrimônio...", "u": "CABORÊ", "a": ["Artes Cênicas", "Memória Social e Patrimônio Cultural", "Trabalho Social com Grupos"], "st": ["Apresentação - Idosos", "Curso - Teatro", "Exposição"], "tp": 119190, "ts": 3, "or": 404300.0}];
+
+// ═══════════════════════════════════════
+// AREA CONFIG
+// ═══════════════════════════════════════
+const AREA_CONFIG = {
+  'Artes Cênicas':                    { cor: '#e85d3a', icon: '🎭', bg: 'linear-gradient(135deg, #e85d3a 0%, #f59e0b 100%)' },
+  'Artes Visuais':                    { cor: '#7c3aed', icon: '🎨', bg: 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)' },
+  'Música':                           { cor: '#0891b2', icon: '🎵', bg: 'linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)' },
+  'Literatura':                       { cor: '#b45309', icon: '📖', bg: 'linear-gradient(135deg, #b45309 0%, #d97706 100%)' },
+  'Memória Social e Patrimônio Cultural': { cor: '#15803d', icon: '🏛️', bg: 'linear-gradient(135deg, #15803d 0%, #22c55e 100%)' },
+  'Audiovisual':                      { cor: '#4338ca', icon: '🎬', bg: 'linear-gradient(135deg, #4338ca 0%, #818cf8 100%)' },
+  'Arte Educação':                    { cor: '#c026d3', icon: '✨', bg: 'linear-gradient(135deg, #c026d3 0%, #e879f9 100%)' },
+  'Desenvolvimento Físico-Esportivo': { cor: '#dc2626', icon: '🏃', bg: 'linear-gradient(135deg, #dc2626 0%, #f87171 100%)' },
+  'Educação Ampliada':                { cor: '#0d9488', icon: '🔧', bg: 'linear-gradient(135deg, #0d9488 0%, #2dd4bf 100%)' },
+  'Trabalho Social com Grupos':       { cor: '#ea580c', icon: '🤝', bg: 'linear-gradient(135deg, #ea580c 0%, #fb923c 100%)' },
+  'Turismo Social':                   { cor: '#059669', icon: '🗺️', bg: 'linear-gradient(135deg, #059669 0%, #34d399 100%)' },
+};
+
+const DEFAULT_CONFIG = { cor: '#64748b', icon: '📌', bg: 'linear-gradient(135deg, #64748b 0%, #94a3b8 100%)' };
+
+// ═══════════════════════════════════════
+// IMAGENS — GitHub Pages
+// ═══════════════════════════════════════
+const IMG_BASE = 'https://antoniogarciacouto.github.io/psc2026/imagens';
+
+const SLUG_MAP = {
+  'ARTE DA PALAVRA - PSC': 'arte-da-palavra',
+  'ARTES VISUAIS - EXPOSIÇÕES CABORÊ': 'artes-visuais-exposicoes',
+  'ARTES VISUAIS - FORMAÇÃO E PESQUISA': 'artes-visuais-formacao',
+  'AÇÕES FORMATIVAS EM MÚSICA': 'acoes-formativas-em-musica',
+  'CASA DO PATRIMÔNIO': 'casa-do-patrimonio',
+  'CINE SESC 2026': 'cine-sesc-2026',
+  'CINE SESC MIRIM 2026': 'cine-sesc-mirim-2026',
+  'CIRCOLADÔ': 'circolado',
+  'CIRCUITO SESC DE CORRIDAS - PARATY 2026': 'circuito-sesc-corridas',
+  'CLUBE DA CORRIDA': 'clube-da-corrida',
+  'CLUBE SESC DE LEITORES': 'clube-sesc-de-leitores',
+  'CRIAR SESC I - ANOS INICIAIS DO ENSINO FUNDAMENTAL': 'criar-sesc',
+  'DANÇAS LIVRES': 'dancas-livres',
+  'DANÇAS SOCIAIS': 'dancas-sociais',
+  'DECANTO DE DANÇA': 'decanto-de-danca',
+  'DIÁLOGOS EM PRODUÇÃO CULTURAL': 'dialogos-producao-cultural',
+  'EDUCAÇÃO PATRIMONIAL E TURISMO SOCIAL': 'educacao-patrimonial',
+  'ESPAÇO CRIATIVO MAKER': 'espaco-criativo-maker',
+  'ESTÚDIO CABORÊ': 'estudio-cabore',
+  'EXERCÍCIOS REGULARES': 'exercicios-regulares',
+  'FAZERES DAQUI': 'fazeres-daqui',
+  'HUB CONECTA IMPACTA - POLOS \u2013 ESPAÇO DE EXPERIMETAÇÃO E PROTOTIPAGEM DO ECOSSISTEMA SESC DE INOVAÇÃO': 'hub-conecta-impacta',
+  'LEVANTES DAQUI': 'levantes-daqui',
+  'MINHA MÚSICA': 'minha-musica',
+  'MUTUÁ  EM AÇÕES': 'mutua-em-acoes',
+  'NA REAL 2026': 'na-real-2026',
+  'PALCO GIRATÓRIO - RESIDÊNCIAS ARTÍSTICAS': 'palco-giratorio',
+  'PLAYGROUND -TERRITÓRIO BRINCANTE': 'playground-brincante',
+  'RESIDÊNCIA LITERÁRIA': 'residencia-literaria',
+  'ROTAS DA MEMÓRIA - 80 ANOS SESC': 'rotas-da-memoria',
+  'SESC EAD EJA IMPLANTAÇÃO E ACOMPANHAMENTO': 'sesc-ead-eja',
+  'SESC LABMAIS - LABORATÓRIO SESC DE ARTES, MÍDIAS, TECNOLOGIAS E JUVENTUDES': 'sesc-labmais',
+  'SESC MEDIAÇÕES 2026': 'sesc-mediacoes-2026',
+  'SESC NA FLIP': 'sesc-na-flip',
+  'SONORA BRASIL 2026': 'sonora-brasil-2026',
+  'TEATRALIDADES': 'teatralidades',
+  'TERRITÓRIOS DO PENSAR': 'territorios-do-pensar',
+  'TODA MÚSICA': 'toda-musica',
+  'VOZES DA MEMÓRIA': 'vozes-da-memoria',
+};
+
+function getSlug(nome) {
+  return SLUG_MAP[nome] || nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,'-');
+}
+
+function getCapaUrl(nome) {
+  return `${IMG_BASE}/${getSlug(nome)}/capa.jpg`;
+}
+
+function getAreaConfig(areas) {
+  if (!areas || areas.length === 0) return DEFAULT_CONFIG;
+  return AREA_CONFIG[areas[0]] || DEFAULT_CONFIG;
+}
+
+function getAreaLabel(areas) {
+  if (!areas || areas.length === 0) return 'Projeto';
+  if (areas.length === 1) return areas[0];
+  return areas[0] + ' +' + (areas.length - 1);
+}
+
+// ═══════════════════════════════════════
+// SVG PATTERNS (procedural per area)
+// ═══════════════════════════════════════
+function genPattern(area, seed) {
+  const s = seed || 0;
+  const shapes = [];
+  const count = 6 + (s % 4);
+  for (let i = 0; i < count; i++) {
+    const x = 10 + ((s * 37 + i * 73) % 80);
+    const y = 10 + ((s * 53 + i * 47) % 80);
+    const r = 8 + ((s + i * 19) % 30);
+    const type = (s + i) % 3;
+    if (type === 0) {
+      shapes.push(`<circle cx="${x}%" cy="${y}%" r="${r}" fill="white" opacity="0.15"/>`);
+    } else if (type === 1) {
+      shapes.push(`<rect x="${x-r/2}%" y="${y-r/2}%" width="${r*1.5}" height="${r*1.5}" rx="3" fill="white" opacity="0.1" transform="rotate(${(s*i*13)%45} ${x} ${y})"/>`);
+    } else {
+      shapes.push(`<polygon points="${x},${y-r} ${x+r*0.87},${y+r*0.5} ${x-r*0.87},${y+r*0.5}" fill="white" opacity="0.08"/>`);
+    }
+  }
+  return `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">${shapes.join('')}</svg>`;
+}
+
+// ═══════════════════════════════════════
+// FORMAT HELPERS
+// ═══════════════════════════════════════
+function fmtNum(n) {
+  if (!n) return '—';
+  if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace('.', ',') + ' mil';
+  return n.toLocaleString('pt-BR');
+}
+
+function fmtBRL(n) {
+  if (!n) return '—';
+  if (n >= 1000000) return 'R$ ' + (n / 1000000).toFixed(1).replace('.', ',') + ' mi';
+  if (n >= 1000) return 'R$ ' + (n / 1000).toFixed(0) + ' mil';
+  return 'R$ ' + n.toLocaleString('pt-BR');
+}
+
+function titleCase(str) {
+  if (!str) return '';
+  const lower = ['da', 'de', 'do', 'das', 'dos', 'e', 'em', 'a', 'o', 'à', 'ao', 'no', 'na', 'nos', 'nas', 'por', 'para', 'com', 'sem'];
+  return str.split(/[\s]+/).map((w, i) => {
+    const wl = w.toLowerCase();
+    if (wl === 'psc' || wl === 'sesc' || wl === 'flip' || wl === 'ead' || wl === 'eja' || wl === 'ii' || wl === 'i') return w.toUpperCase();
+    if (i > 0 && lower.includes(wl) && w.length <= 3) return wl;
+    if (w.length <= 1) return wl;
+    return wl.charAt(0).toUpperCase() + wl.slice(1);
+  }).join(' ');
+}
+
+// ═══════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════
+let currentArea = 'Todos';
+let currentUnit = 'todas';
+let searchTerm = '';
+
+function getFiltered() {
+  return PROJETOS.filter(p => {
+    if (currentArea !== 'Todos') {
+      if (!p.a || !p.a.includes(currentArea)) return false;
+    }
+    if (currentUnit !== 'todas') {
+      if (p.u !== currentUnit) return false;
+    }
+    if (searchTerm) {
+      const s = searchTerm.toLowerCase();
+      const haystack = (p.n + ' ' + p.d + ' ' + (p.a||[]).join(' ')).toLowerCase();
+      if (!haystack.includes(s)) return false;
+    }
+    return true;
+  });
+}
+
+function renderCards() {
+  const grid = document.getElementById('projectsGrid');
+  const empty = document.getElementById('emptyState');
+  const filtered = getFiltered();
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  grid.innerHTML = filtered.map((p, i) => {
+    const cfg = getAreaConfig(p.a);
+    const areaLabel = getAreaLabel(p.a);
+    const unitLabel = p.u === 'CABORÊ' ? 'Caborê' : (p.u === 'SANTA RITA' ? 'Santa Rita' : p.u);
+    const name = titleCase(p.n);
+    const delay = Math.min(i * 0.04, 0.4);
+
+    const slug = getSlug(p.n);
+
+    return `
+      <div class="project-card" onclick="window.location.href='projeto.html?id=${slug}'" style="animation-delay:${delay}s">
+        <div class="card-visual" style="background:${cfg.bg}" id="vis-${p.id}">
+          <div class="visual-pattern">${genPattern(p.a?.[0], parseInt(p.id))}</div>
+          <div class="visual-icon">${cfg.icon}</div>
+          <img class="card-cover" src="${getCapaUrl(p.n)}" alt="" loading="lazy"
+               onerror="this.remove()"
+               onload="this.parentNode.querySelector('.visual-pattern').style.display='none'; this.parentNode.querySelector('.visual-icon').style.display='none';">
+          <div class="visual-area-label">${areaLabel}</div>
+          <div class="visual-unit-badge">${unitLabel}</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">${name}</div>
+          <div class="card-desc">${p.d || 'Descrição em elaboração.'}</div>
+          ${(p.tp || p.ts) ? `
+          <div class="card-meta">
+            ${p.tp ? `<div class="card-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><strong>${fmtNum(p.tp)}</strong> pessoas</div>` : ''}
+            ${p.ts ? `<div class="card-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><strong>${p.ts}</strong> serviços</div>` : ''}
+          </div>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+function renderNav() {
+  const nav = document.getElementById('navBar');
+  // Count per area
+  const counts = { 'Todos': PROJETOS.length };
+  PROJETOS.forEach(p => {
+    (p.a || []).forEach(a => {
+      counts[a] = (counts[a] || 0) + 1;
+    });
+  });
+
+  const areas = ['Todos', ...Object.keys(AREA_CONFIG).filter(a => counts[a])];
+
+  nav.innerHTML = areas.map(a => {
+    const cfg = a === 'Todos' ? { cor: '#1a1715' } : (AREA_CONFIG[a] || DEFAULT_CONFIG);
+    const short = a === 'Memória Social e Patrimônio Cultural' ? 'Memória e Patrimônio' : a;
+    return `
+      <button class="nav-pill ${a === currentArea ? 'active' : ''}" onclick="setArea('${a}')">
+        ${a !== 'Todos' ? `<span class="pill-dot" style="background:${cfg.cor}"></span>` : ''}
+        ${short}
+        <span class="pill-count">${counts[a] || 0}</span>
+      </button>
+    `;
+  }).join('');
+}
+
+function setArea(a) {
+  currentArea = a;
+  renderNav();
+  renderCards();
+}
+
+// ═══════════════════════════════════════
+// UNIT TOGGLE
+// ═══════════════════════════════════════
+document.getElementById('unitToggle').addEventListener('click', e => {
+  const btn = e.target.closest('.unit-btn');
+  if (!btn) return;
+  currentUnit = btn.dataset.unit;
+  document.querySelectorAll('.unit-btn').forEach(b => b.classList.toggle('active', b === btn));
+  renderCards();
+});
+
+// ═══════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value.trim();
+  renderCards();
+});
+
+// ═══════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════
+function openModal(id) {
+  const p = PROJETOS.find(x => x.id === id);
+  if (!p) return;
+  const cfg = getAreaConfig(p.a);
+  const name = titleCase(p.n);
+  const unitLabel = p.u === 'CABORÊ' ? 'Caborê' : (p.u === 'SANTA RITA' ? 'Santa Rita' : p.u);
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-visual" style="background:${cfg.bg}">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="visual-icon" id="modal-icon">${cfg.icon}</div>
+      <img class="card-cover" src="${getCapaUrl(p.n)}" alt="" 
+           onerror="this.remove()"
+           onload="document.getElementById('modal-icon').style.display='none';">
+    </div>
+    <div class="modal-body">
+      <div class="modal-area-tags">
+        ${(p.a || []).map(a => {
+          const c = AREA_CONFIG[a] || DEFAULT_CONFIG;
+          return `<span class="modal-area-tag" style="background:${c.cor}">${a}</span>`;
+        }).join('')}
+      </div>
+      <div class="modal-title">${name}</div>
+      <div class="modal-unit">📍 ${unitLabel}</div>
+
+      ${p.d ? `
+        <div class="modal-section-title">Sobre o projeto</div>
+        <div class="modal-text">${p.d}</div>
+      ` : ''}
+
+      ${p.o && p.o !== 'Sem objetivo cadastrado' ? `
+        <div class="modal-section-title">Objetivo</div>
+        <div class="modal-text">${p.o}</div>
+      ` : ''}
+
+      ${(p.tp || p.ts || p.or) ? `
+        <div class="modal-stats">
+          ${p.tp ? `<div class="modal-stat"><div class="modal-stat-num">${fmtNum(p.tp)}</div><div class="modal-stat-label">Pessoas</div></div>` : ''}
+          ${p.ts ? `<div class="modal-stat"><div class="modal-stat-num">${p.ts}</div><div class="modal-stat-label">Serviços</div></div>` : ''}
+          ${p.or ? `<div class="modal-stat"><div class="modal-stat-num">${fmtBRL(p.or)}</div><div class="modal-stat-label">Orçamento</div></div>` : ''}
+        </div>
+      ` : ''}
+
+      ${(p.st && p.st.length) ? `
+        <div class="modal-section-title">Tipos de serviço</div>
+        <div class="modal-services">
+          ${p.st.map(s => `<span class="modal-service-tag">${s}</span>`).join('')}
+        </div>
+      ` : ''}
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ═══════════════════════════════════════
+// HERO STATS
+// ═══════════════════════════════════════
+function renderHeroStats() {
+  const totalProj = PROJETOS.length;
+  const totalPessoas = PROJETOS.reduce((s, p) => s + (p.tp || 0), 0);
+  const totalServicos = PROJETOS.reduce((s, p) => s + (p.ts || 0), 0);
+  const areas = new Set();
+  PROJETOS.forEach(p => (p.a || []).forEach(a => areas.add(a)));
+
+  document.getElementById('heroStats').innerHTML = `
+    <div><div class="hero-stat-num">${totalProj}</div><div class="hero-stat-label">Projetos</div></div>
+    <div><div class="hero-stat-num">${areas.size}</div><div class="hero-stat-label">Áreas culturais</div></div>
+    <div><div class="hero-stat-num">${fmtNum(totalPessoas)}</div><div class="hero-stat-label">Pessoas previstas</div></div>
+    <div><div class="hero-stat-num">${totalServicos}</div><div class="hero-stat-label">Serviços planejados</div></div>
+  `;
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+renderHeroStats();
+renderNav();
+renderCards();
+</script>
+
+</body>
+</html>
