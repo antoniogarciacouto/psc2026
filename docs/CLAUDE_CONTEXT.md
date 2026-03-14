@@ -2,137 +2,106 @@
 
 Este projeto tem como objetivo construir uma plataforma digital para dar visibilidade aos projetos culturais do Polo Sociocultural Sesc Paraty (PSC).
 
-A plataforma funcionará como:
+A plataforma funciona como vitrine institucional, repositório de projetos, memória programática e ferramenta de difusão cultural.
 
-- vitrine institucional
-- repositório de projetos
-- memória programática
-- ferramenta de difusão cultural
+Faz parte de um ecossistema maior de ferramentas digitais de gestão do PSC (painéis orçamentários, agenda, perfil de público, etc.), documentado em `Contexto_EcossistemaPSC2026.md`.
 
 ---
 
-# Sobre o PSC
+## Sobre o PSC
 
-O Polo Sociocultural Sesc Paraty é uma unidade do Departamento Nacional do Sesc dedicada ao desenvolvimento, experimentação e difusão de projetos culturais.
+O Polo Sociocultural Sesc Paraty é uma unidade do Departamento Nacional do Sesc dedicada ao desenvolvimento, experimentação e difusão de projetos culturais em Paraty, RJ.
 
-Sua atuação envolve:
-
-- cultura
-- patrimônio
-- educação
-- território
-- inovação cultural
-- articulação com a rede Sesc
+Opera em duas unidades programáticas (Caborê e Santa Rita) e uma base administrativa.
 
 ---
 
-# Estrutura da pasta do projeto
+## Arquivos da plataforma
 
-O projeto está organizado da seguinte forma:
+| Arquivo | Função |
+|---|---|
+| `Portfolio_PSC2026.html` | Landing page com grid de projetos, filtros e busca |
+| `projeto.html` | Template de página individual de projeto (renderiza por slug via URL) |
 
-docs/
-contexto e orientações institucionais
-
-data/
-dados estruturados dos projetos
-
-content/
-textos completos dos projetos
-
-images/
-imagens utilizadas no site
-
-site/
-arquivos HTML, CSS e Javascript da plataforma
+Ambos são HTML standalone que carregam dados do GitHub Pages via fetch.
 
 ---
 
-# Fonte de dados
+## Fonte de dados
 
-Os projetos estão listados no arquivo:
+Os projetos estão no arquivo `data/portfolio_2026.csv`, exportado do Microsoft Lists.
 
-data/projetos.csv
-
-Esse arquivo contém os projetos planejados para 2026 no Polo Sociocultural Sesc Paraty.
-
-Ele deve ser usado para gerar automaticamente:
-
-- cards de projeto
-- páginas individuais
-- filtros
+A agenda de atividades está em `PSC_Agenda2026.csv` no repositório `agendaPSC`.
 
 ---
 
-# Estrutura da plataforma
+## Estrutura do repositório
 
-A plataforma deve ter duas camadas principais.
-
-## Landing Page
-
-Página inicial com:
-
-- apresentação institucional
-- grid de projetos
-- filtros de navegação
-- links para redes sociais
-
-Cada projeto deve aparecer como um card contendo:
-
-- thumbnail
-- título
-- categoria
-- link para a página do projeto
-
----
-
-# Página individual de projeto
-
-Cada projeto deve ter uma página própria contendo:
-
-- título
-- descrição
-- categoria
-- área
-- galeria de imagens
+```
+psc2026/
+├── data/
+│   └── portfolio_2026.csv          ← dados dos projetos (CSV do Lists)
+├── imagens/
+│   ├── institucional/
+│   │   └── logo.png                ← logomarca do PSC
+│   ├── arte-da-palavra/
+│   │   ├── capa.jpg                ← imagem de capa (card do grid)
+│   │   ├── arte-da-palavra_01.jpg  ← imagem de galeria
+│   │   └── ...
+│   ├── levantes-daqui/
+│   │   ├── capa.jpg
+│   │   └── ...
+│   └── ...                         ← uma pasta por projeto
+├── content/                        ← textos completos (reservado)
+├── docs/                           ← documentação (reservado)
+└── README.md
+```
 
 ---
 
-# Filtros da plataforma
+## Filtros da plataforma
 
-Os projetos devem poder ser filtrados por:
+Os projetos podem ser filtrados por:
 
-- área cultural
-- categoria do projeto
-- ano
-
----
-
-# Redes sociais
-
-A landing page deve incluir links para:
-
-Instagram  
-https://www.instagram.com/sescparaty/
-
-YouTube  
-https://www.youtube.com/@SescParaty/videos
-
-Facebook  
-https://www.facebook.com/sescparaty/?locale=pt_BR
+- **Portfólio:** Difusão, Formação, Experimentação, Pesquisa
+- **Área cultural:** Artes Cênicas, Artes Visuais, Música, Literatura, etc.
+- **Unidade:** Caborê, Santa Rita
+- **Busca por texto**
 
 ---
 
-# Linguagem visual
+## Página individual de projeto
 
-O site deve ter linguagem contemporânea inspirada em:
+Cada projeto tem uma página acessada via `projeto.html?id={slug}` contendo:
 
-- plataformas culturais
-- museus
-- portais curatoriais
+- Hero com imagem de capa
+- Descrição e objetivo
+- Dimensões (pessoas, serviços, orçamento, tipos de serviço)
+- Agenda 2026 (timeline de atividades, carregada do CSV da agenda)
+- Galeria de imagens (auto-discovery)
+- Vídeo do YouTube (opcional)
+- Conteúdos extras (opcional)
 
-Priorizar:
+---
 
-- layout limpo
-- imagens grandes
-- tipografia elegante
-- navegação simples
+## Convenções de imagem
+
+- Capas: `imagens/{slug}/capa.jpg` — JPG, 1200×675px ideal
+- Galeria: `imagens/{slug}/{slug}_01.jpg`, `_02.jpg`... — numeração sequencial
+- Logo: `imagens/institucional/logo.png`
+
+---
+
+## Redes sociais
+
+- Instagram: https://www.instagram.com/sescparaty/
+- YouTube: https://www.youtube.com/@SescParaty/videos
+- Facebook: https://www.facebook.com/sescparaty/?locale=pt_BR
+
+---
+
+## Linguagem visual
+
+A landing page usa identidade clara e institucional (fundo creme, tipografia elegante).
+A página de projeto usa identidade dark e contemporânea (fundo escuro, tipografia bold).
+Ambas priorizam imagens grandes, navegação simples e leitura rápida.
