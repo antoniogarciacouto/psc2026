@@ -158,7 +158,7 @@ body {
 }
 
 /* ── NAVIGATION / FILTERS ── */
-.nav-bar {
+.nav-wrap {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -166,51 +166,160 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  padding: 0 64px;
+  padding: 12px 64px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.nav-bar::-webkit-scrollbar { display: none; }
+.filter-dropdown {
+  position: relative;
+}
 
-.nav-pill {
+.filter-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 14px 16px;
+  gap: 8px;
+  padding: 8px 16px;
   font-size: 13px;
   font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.filter-btn:hover { border-color: var(--border-hover); color: var(--text); }
+
+.filter-btn.has-filter {
+  background: var(--accent-light, #fef0ea);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-btn .filter-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
+  font-weight: 600;
+}
+
+.filter-btn svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.4;
+  transition: transform 0.2s;
+}
+
+.filter-dropdown.open .filter-btn svg {
+  transform: rotate(180deg);
+}
+
+.filter-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
+  padding: 6px;
+  z-index: 200;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.filter-dropdown.open .filter-menu { display: block; }
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
   border: none;
   background: none;
+  width: 100%;
+  text-align: left;
   cursor: pointer;
-  white-space: nowrap;
-  border-bottom: 2px solid transparent;
-  transition: var(--transition);
+  border-radius: 6px;
   font-family: inherit;
+  font-weight: 400;
+  transition: var(--transition);
 }
 
-.nav-pill:hover { color: var(--text); }
+.filter-option:hover { background: var(--bg-warm); color: var(--text); }
 
-.nav-pill.active {
+.filter-option.active {
+  background: var(--bg-warm);
   color: var(--text);
-  border-bottom-color: var(--accent);
+  font-weight: 600;
 }
 
-.nav-pill .pill-dot {
+.filter-option .opt-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
-.nav-pill .pill-count {
+.filter-option .opt-count {
+  margin-left: auto;
   font-size: 11px;
   color: var(--text-muted);
   font-weight: 400;
+}
+
+.filter-sep {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.nav-search {
+  margin-left: auto;
+  position: relative;
+}
+
+.nav-search input {
+  width: 200px;
+  padding: 8px 12px 8px 34px;
+  font-size: 13px;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text);
+  outline: none;
+  transition: var(--transition);
+}
+
+.nav-search input:focus {
+  border-color: var(--border-hover);
+  width: 280px;
+  box-shadow: 0 0 0 3px rgba(194,66,12,0.06);
+}
+
+.nav-search input::placeholder { color: var(--text-muted); }
+
+.nav-search svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
 }
 
 /* ── SECTION: AREA HIGHLIGHTS ── */
@@ -676,7 +785,9 @@ body {
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .hero { padding: 56px 32px 48px; }
-  .nav-bar { padding: 0 24px; }
+  .nav-wrap { padding: 10px 24px; }
+  .nav-search input { width: 160px; }
+  .nav-search input:focus { width: 200px; }
   .section { padding: 40px 24px; }
   .site-footer { padding: 36px 24px; }
   .hero-stats-row { gap: 24px; flex-wrap: wrap; }
@@ -689,7 +800,10 @@ body {
 
 @media (max-width: 520px) {
   .hero { padding: 40px 20px 36px; }
-  .nav-bar { padding: 0 16px; }
+  .nav-wrap { padding: 8px 16px; gap: 8px; }
+  .nav-search { width: 100%; margin-left: 0; }
+  .nav-search input { width: 100%; }
+  .nav-search input:focus { width: 100%; }
   .section { padding: 32px 16px; }
   .site-footer { padding: 28px 16px; }
   .projects-grid { grid-template-columns: 1fr; }
@@ -725,21 +839,40 @@ body {
 </header>
 
 <!-- ═══ NAV / FILTERS ═══ -->
-<nav class="nav-bar" id="navBar"></nav>
+<div class="nav-wrap" id="navWrap">
+  <div class="filter-dropdown" id="ddPortfolio">
+    <button class="filter-btn" onclick="toggleDropdown('ddPortfolio')">
+      <span class="filter-label">Portfólio</span>
+      <span id="ddPortfolioValue">Todos</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="filter-menu" id="ddPortfolioMenu"></div>
+  </div>
+  <div class="filter-dropdown" id="ddArea">
+    <button class="filter-btn" onclick="toggleDropdown('ddArea')">
+      <span class="filter-label">Área</span>
+      <span id="ddAreaValue">Todas</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="filter-menu" id="ddAreaMenu"></div>
+  </div>
+  <div class="filter-dropdown" id="ddUnidade">
+    <button class="filter-btn" onclick="toggleDropdown('ddUnidade')">
+      <span class="filter-label">Unidade</span>
+      <span id="ddUnidadeValue">Todas</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="filter-menu" id="ddUnidadeMenu"></div>
+  </div>
+  <div class="filter-sep"></div>
+  <div class="nav-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Buscar projeto...">
+  </div>
+</div>
 
 <!-- ═══ CONTENT ═══ -->
 <main class="section">
-  <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap; margin-bottom:8px;">
-    <div class="search-wrap">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      <input class="search-input" type="text" id="searchInput" placeholder="Buscar projeto...">
-    </div>
-    <div class="unit-toggle" id="unitToggle">
-      <button class="unit-btn active" data-unit="todas">Todas</button>
-      <button class="unit-btn" data-unit="CABORÊ">Caborê</button>
-      <button class="unit-btn" data-unit="SANTA RITA">Santa Rita</button>
-    </div>
-  </div>
   <div class="projects-grid" id="projectsGrid"></div>
   <div class="empty-state" id="emptyState" style="display:none;">
     <div class="empty-state-icon">🔍</div>
@@ -770,7 +903,7 @@ body {
 // ═══════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════
-const PROJETOS = [{"id": "1951", "n": "ARTE DA PALAVRA - PSC", "d": "O projeto é constituído por ações formativas e de fruição literária, voltado para alunos da rede pública e interessados em leitura. Foi criado, em 2017, pelo Departamento Nacional dentro do PAP - Plano de Ações Prioritárias. É composto pelas seguintes realizações:Circuito de Autores – circuito...", "o": "Circuito de Criação Literária:Estimular a criação literária e a formação de novos escritores por meio da realização de oficinas do projeto Arte da Palavra, promovendo o acesso à literatura como ferramenta de expressão e desenvolvimento pessoal entre...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Oficina"], "tp": 375, "ts": 9, "or": 128600.0}, {"id": "2244", "n": "ARTES VISUAIS - EXPOSIÇÕES CABORÊ", "d": "Realização de três exposições com propostas acessíveis e acolhedoras que valorizam a diversidade de vozes e práticas das artes visuais contemporâneas, especialmente aquelas que exploram as relações entre ciência e paisagem. Voltadas prioritariamente aos comerciários de Paraty e seus dependentes, as...", "o": "Oferecer à população de Paraty experiências expositivas diversificadas e acessíveis nos espaços do Sesc Caborê, promovendo o contato com diferentes linguagens das artes visuais e fortalecendo a dimensão educativa da visitação.", "u": "CABORÊ", "a": ["Artes Visuais"], "st": ["Exposição"], "tp": 10000, "ts": 2, "or": 848200.0}, {"id": "2258", "n": "ARTES VISUAIS - FORMAÇÃO E PESQUISA", "d": "O projeto Formação e Pesquisa em Artes Visuais do Sesc Paraty promove a fruição e a produção artística para diferentes públicos, articulando formação, pesquisa e vivências. Por meio de cursos de desenho, cerâmica e bordado, oficinas vinculadas a exposições, Ateliê Aberto e residências artísticas, o...", "o": "Fomentar a pesquisa e a formação continuada no campo das Artes Visuais, reconhecendo o papel transformador da cultura na construção de uma sociedade mais justa, igualitária e sustentável. Essa diretriz fortalece o compromisso do Sesc com a...", "u": "CABORÊ", "a": ["Artes Visuais"], "st": ["Curso", "Exposição", "Oficina", "Palestra", "Residência artística"], "tp": 1380, "ts": 20, "or": 512520.0}, {"id": "2861", "n": "AÇÕES FORMATIVAS EM MÚSICA", "d": "A programação de cursos de música do Sesc Caborê para 2026 visa a iniciação musical, atraindo diversos públicos. Pensada também como uma oportunidade de bem-estar, expressão e lazer para os trabalhadores do comércio e seus familiares, a programação oferece cursos introdutórios que não exigem...", "o": "GERAL: O projeto de cursos de música do Sesc Caborê para 2026 tem como objetivo promover a iniciação musical e atrair diversos públicos. A proposta é oferecer cursos que não exigem experiência prévia, proporcionando uma introdução ao universo...", "u": "CABORÊ", "a": ["Música"], "st": ["Curso", "Oficina"], "tp": 165, "ts": 30, "or": 637200.0}, {"id": "2362", "n": "CASA DO PATRIMÔNIO", "d": "A Casa do Patrimônio de Paraty atua na preservação, salvaguarda e difusão do patrimônio cultural, em diálogo direto com o território. Estruturado a partir de ações compartilhadas de formação, mediação cultural e educação patrimonial, o projeto promove o reconhecimento e a valorização das múltiplas...", "o": "Desenvolver ações formativas e mediadas a partir de parcerias estratégicas com instituições do campo do patrimônio e da cultura, fortalecendo a atuação territorial do Polo Sociocultural Sesc Paraty e ampliando o acesso da clientela preferencial a...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição", "Oficina", "Palestra"], "tp": 37550, "ts": 47, "or": 891400.0}, {"id": "2286", "n": "CINE SESC 2026", "d": "O Cine Sesc integra as ações do Polo Sociocultural Sesc Paraty, promovendo o acesso à linguagem audiovisual por meio de exibições de filmes, mediação cultural e atividades arte-educativas. Voltado à formação de públicos e à valorização do cinema como expressão artística, o projeto tem como...", "o": "Ampliar o acesso à linguagem audiovisual por meio de uma programação contínua de cinema, promovendo a formação de público, a reflexão crítica e a valorização da diversidade estética. O projeto tem como foco os trabalhadores do comércio de bens,...", "u": "SANTA RITA", "a": ["Audiovisual"], "st": ["Debate", "Exibição"], "tp": 2525, "ts": 179, "or": 84296.0}, {"id": "2293", "n": "CINE SESC MIRIM 2026", "d": "Cine Sesc Mirim é um projeto voltado à formação cultural de crianças e adolescentes por meio de sessões de cinema com mediação e atividades arte-educativas. De agosto a novembro de 2026, realizará sessões mensais em espaços externos e na Unidade Santa Rita, ativando filmes do acervo Cine Sesc 2026...", "o": "Promover a formação cultural de crianças e adolescentes por meio da exibição de filmes infanto-juvenis com mediação e atividades arte-educativas, ampliando o acesso ao cinema e à reflexão crítica em territórios com pouca oferta de equipamentos...", "u": "SANTA RITA", "a": ["Audiovisual"], "st": ["Exibição", "Mediação", "Oficina"], "tp": 860, "ts": 35, "or": 96774.0}, {"id": "2114", "n": "CIRCOLADÔ", "d": "Circoladô é uma ação formativa para crianças e jovens, especialmente dependentes de comerciários, que utiliza o circo social para estimular criatividade, expressão corporal, coordenação, concentração e trabalho em equipe. Promove aprendizagem lúdica e desenvolvimento social, emocional e cognitivo,...", "o": "Desenvolver habilidades de expressão, coordenação motora, concentração e imaginação entre crianças e jovens por meio de oficinas de circo social, promovendo o lúdico e a convivência em grupo, com foco na inclusão da clientela preferencial.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Circo", "Curso - Circo"], "tp": 2560, "ts": 8, "or": 233820.0}, {"id": "1697", "n": "CIRCUITO SESC DE CORRIDAS - PARATY 2026", "d": "A Etapa Paraty do Circuito Sesc de Corridas integra o projeto nacional do Sesc que padroniza e qualifica provas de corrida em todo o país. Com identidade visual unificada e diretrizes comuns, respeita as particularidades locais. Em Paraty, a prova valoriza o contexto histórico, cultural e natural...", "o": "Realizar a etapa local do Circuito Sesc de Corridas, promovendo a participação ativa da comunidade em evento esportivo de grande alcance, com foco na clientela preferencial e na prática segura de atividade física.", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2076", "n": "CLUBE DA CORRIDA", "d": "O Clube de Corrida do Sesc Caborê – Paraty é uma iniciativa voltada à promoção da atividade física regular por meio da prática orientada da corrida de rua. A proposta é oferecer encontros semanais com acompanhamento profissional, estímulo à participação em eventos esportivos e ações educativas...", "o": "Implantar e manter um Clube de Corrida no Sesc Caborê, oferecendo à população de Paraty uma oportunidade contínua e acessível de prática orientada de corrida e caminhada, contribuindo para a melhoria da qualidade de vida, o fortalecimento de...", "u": "CABORÊ", "a": ["Desenvolvimento Físico-Esportivo"], "st": [], "tp": 40, "ts": 2, "or": 179800.0}, {"id": "1953", "n": "CLUBE SESC DE LEITORES", "d": "O Clube Sesc de Leitores, ação regular desde 2018, promove o hábito cotidiano da leitura, destacando que não há escrita sem leitura. Em 2026, realizará cinco ciclos de três semanas, com encontros semanais e participação do/a autor/a no encerramento. A curadoria seguirá conectada ao contexto...", "o": "O objetivo central é formar novos leitores, principalmente dentro do nosso público preferencial, e ampliar o repertório crítico dos participantes, promovendo a leitura como prática cultural e ferramenta de pertencimento. Para isso, o projeto realiza...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Debate", "Mediação"], "tp": 5375, "ts": 495, "or": 315390.0}, {"id": "2093", "n": "DANÇAS LIVRES", "d": "Danças Livres é uma ação formativa regular voltada ao público preferencial do Sesc, com foco na promoção da qualidade de vida e do bem-estar físico e emocional por meio da expressão corporal. Com metodologia baseada na consciência corporal e no movimento espontâneo, a atividade valoriza o...", "o": "Promover o bem-estar físico e emocional dos participantes por meio de práticas regulares de dança, estimulando a criatividade corporal, o autoconhecimento e a integração entre os participantes, com atenção à inclusão de trabalhadores do comércio.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Curso - Dança"], "tp": 330, "ts": 2, "or": 167020.0}, {"id": "2043", "n": "DANÇAS SOCIAIS", "d": "Danças Sociais é uma atividade formativa regular voltada ao público preferencial do Sesc – trabalhadores do comércio de bens, serviços e turismo e seus dependentes. A proposta contempla a vivência de danças sociais brasileiras, como samba de gafieira, forró, maxixe, lambada e danças...", "o": "Geral: Mobilizar e formar o público preferencial do Sesc por meio de atividades regulares em danças sociais brasileiras, promovendo a socialização, o bem-estar e a valorização cultural.Específicos:Estimular o convívio e a interação entre...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Curso - Dança"], "tp": 1290, "ts": 5, "or": 172370.0}, {"id": "2120", "n": "DECANTO DE DANÇA", "d": "Decanto de Dança incentiva o contato com a dança valorizando o corpo integrado ao espaço e à identidade cultural de Paraty. Foca nas performances tradicionais e memórias locais, promovendo conexão com expressões regionais e ampliando a compreensão do corpo como símbolo cultural e histórico,...", "o": "Fomentar as expressões corporais negras e indígenas da localidade por meio da realização de ações artísticas, formações e apresentações públicas, promovendo a valorização das corporeidades plurais e a ampliação do repertório estético do público...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Desenvolvimento de experimentações - Dança", "Intercâmbio - Dança"], "tp": 550, "ts": 11, "or": 234700.0}, {"id": "2359", "n": "EDUCAÇÃO PATRIMONIAL E TURISMO SOCIAL", "d": "O projeto Educação Patrimonial e Turismo Social é uma iniciativa que transforma o patrimônio cultural e a biodiversidade de Paraty em experiências educativas e turísticas que promovem pertencimento, inclusão e uso sustentável do território. Em 2026, o projeto conecta os resultados dos levantamentos...", "o": "Desdobrar e ações efetivas os conhecimentos culturais e ambientais sistematizados no ciclo Levantes Daqui em roteiros sustentáveis, processos formativos e vivências mediadas voltadas ao turismo social e à educação patrimonial, promovendo o...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural", "Turismo Social"], "st": ["Cartografia Social", "Curso", "Inventário Participativo", "Passeios - Receptivo", "Vivência"], "tp": 1215, "ts": 41, "or": 559500.0}, {"id": "1952", "n": "ESPAÇO CRIATIVO MAKER", "d": "Implantação do Espaço Criativo Maker da Unidade Sesc Caborê - Av. Otávio Gama, 1709 - Caborê em Paraty/RJ incluindo a aquisição de equipamentos, materiais e a oferta de atividades.", "o": "Objetivo geral: Implantar gradualmente o espaço maker, permitindo ajustes e integração progressiva dos recursos ao território desmistificando o uso do espaço por inteiro.Objetivos Específicos:•\tDefinir layout do espaço e organização do espaço...", "u": "CABORÊ", "a": ["Educação Ampliada"], "st": ["Oficina"], "tp": 50, "ts": 2, "or": 280000.0}, {"id": "2862", "n": "ESTÚDIO CABORÊ", "d": "A partir de 2026, o Sesc Caborê contará com um estúdio de música integrado à sua estrutura. Neste primeiro ano de funcionamento, a proposta é explorar o potencial desse novo espaço como ferramenta de apoio e complementação das atividades já existentes na programação do Polo.Com base em um...", "o": "GERAL: Implementar e operar um estúdio de gravação no Sesc Caborê, com foco na produção de conteúdos que fortaleçam, documentem e ampliem o alcance da programação e das ações desenvolvidas pela unidade.OBJETIVOS ESPECÍFICOS:Registrar e documentar...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2297", "n": "EXERCÍCIOS REGULARES", "d": "O projeto visa implantar regularmente as atividades de Alongamento, Yoga e Pilates Solo no Sesc Caborê, em Paraty, a partir de 2026. As práticas serão oferecidas como parte da programação permanente da unidade, com foco na promoção do bem-estar. As aulas ocorrerão em espaço reservado com estrutura...", "o": "Oferecer à comunidade de Paraty oportunidades regulares de participação em atividades físicas orientadas, por meio das modalidades de Alongamento, Yoga e Pilates Solo, promovendo saúde, bem-estar e qualidade de vida, alinhadas à missão educativa e...", "u": "CABORÊ", "a": ["Desenvolvimento Físico-Esportivo"], "st": [], "tp": 120, "ts": 6, "or": 244250.0}, {"id": "2356", "n": "FAZERES DAQUI", "d": "O Fazeres Daqui é um projeto que reafirma o compromisso do Sesc com a preservação e a valorização do patrimônio cultural como direito, linguagem e recurso estratégico para a construção de identidades, pertencimento e cidadania. Inserido no ciclo de Memória Social e Patrimônio, o projeto atua como...", "o": "Desdobramento  dos levantamentos e registros realizados pelo Levantes Daqui em experiências culturais, educativas e sensoriais que aproximem trabalhadores do comércio, seus dependentes e comunidades locais da preservação e valorização do patrimônio...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição", "Oficina", "Vivência"], "tp": 30550, "ts": 22, "or": 898700.0}, {"id": "2070", "n": "HUB CONECTA IMPACTA - POLOS – ESPAÇO DE EXPERIMETAÇÃO E PROTOTIPAGEM DO ECOSSISTEMA SESC DE INOVAÇÃO", "d": "O Conecta Integra Polos é uma iniciativa estratégica do Departamento Nacional do Sesc que visa integrar os três polos de referência em uma rede colaborativa, fortalecendo a troca de conhecimentos, a experimentação conjunta e a aplicação das melhores práticas institucionais. Por meio de encontros...", "o": "Geral: Integrar os polos de referência do Departamento Nacional em uma rede colaborativa que favoreça a experimentação, a inovação e o compartilhamento de metodologias e protocolos.Específicos:Criar um calendário anual de encontros técnicos e...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2350", "n": "LEVANTES DAQUI", "d": "O Levantes Daqui valoriza o patrimônio cultural de Paraty como vetor de desenvolvimento econômico, turístico e social. Por meio de inventário participativo, registros etnográficos, ações formativas e mediadas, o projeto promove a preservação, circulação e continuidade de saberes tradicionais,...", "o": "O objetivo do Levantes Daqui é valorizar, registrar e mobilizar o patrimônio cultural de Paraty por meio de ações participativas, inventário, pesquisa e formação, fortalecendo a identidade territorial e promovendo a preservação e circulação de...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Cartografia Social", "Debate", "Inventário Participativo", "Mediação", "Oficina", "Palestra", "Roda de Conversa", "Vivência"], "tp": 2930, "ts": 84, "or": 502069.16}, {"id": "2196", "n": "MINHA MÚSICA", "d": "O projeto “Minha Música” promove a diversidade musical em Paraty, destacando as histórias pessoais e afetivas que se conectam à música no cotidiano da cidade. A iniciativa investiga a relação entre música e a vida dos trabalhadores do comércio local, registrando suas memórias e experiências em uma...", "o": "O objetivo geral do projeto Minha Música é promover a valorização das histórias e memórias musicais dos trabalhadores do comércio, serviços e turismo de Paraty, por meio da criação de um acervo audiovisual e de audições musicais que fortaleçam a...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação", "Palestra"], "tp": 400, "ts": 10, "or": 182000.0}, {"id": "2365", "n": "MUTUÁ  EM AÇÕES", "d": "Realizado bienalmente no Polo Sociocultural Sesc Paraty, o Festival Mutuá promove cultura, patrimônio e artes em diálogo com o território de Paraty. Entre uma edição e outra, o Sesc desenvolve o Mutuá em Ações, por meio de atividades regulares com a comunidade, envolvendo diversas linguagens...", "o": "Valorizar as identidades culturais locais, fomentando a diversidade, a inclusão e o diálogo entre diferentes expressões artísticas. Estimular a formação e o intercâmbio entre artistas, agentes culturais, comunidade e equipes dos Departamentos...", "u": "CABORÊ", "a": ["Arte Educação", "Artes Cênicas", "Artes Visuais", "Literatura", "Memória Social e Patrimônio Cultural", "Música"], "st": ["Oficina", "Oficina - Dança", "Oficina - Escrita literária", "Palestra"], "tp": 890, "ts": 31, "or": 405080.0}, {"id": "2311", "n": "NA REAL 2026", "d": "O projeto Na Real 2026, será desenvolvido pelo Polo Sociocultural (PSC) e Trabalho Social com Grupos (TSG), visa fomentar ações criadas por e para jovens, por meio de um percurso formativo que combina oficinas e conteúdos teórico com vivências práticas no território. As temáticas principais a serem...", "o": "Promover percursos formativos voltados às juventudes de Paraty, articulando saberes territoriais, cultura digital, empreendedorismo e inovação social, com foco no fortalecimento da autonomia, do protagonismo juvenil e da inclusão da clientela...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "2011", "n": "PALCO GIRATÓRIO - RESIDÊNCIAS ARTÍSTICAS", "d": "Na 28ª edição, o Palco Giratório é o maior e mais longevo projeto nacional de circulação de espetáculos em Artes Cênicas. Nesta edição promove residências artísticas com foco em territórios de baixa renda e vulnerabilidade social, para fortalecer a acessibilidade cultural, prioritariamente ao...", "o": "Fortalecer a difusão das artes cênicas e o intercâmbio cultural entre artistas e comunidades por meio da participação do PSC no Circuito Nacional Palco Giratório, promovendo o acesso da população local a espetáculos e ações formativas de qualidade.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Residência artística - Dança"], "tp": 330, "ts": 2, "or": 405156.0}, {"id": "2095", "n": "PLAYGROUND -TERRITÓRIO BRINCANTE", "d": "Projeto que prevê a instalação de brinquedos e ambientação paisagística em área externa, na Unidade do Sesc Caborê. A proposta tem como conceito estruturante a ideia de espaços naturalizados, que se traduzem na criação de ambientes lúdicos compostos por elementos como madeira, areia, água,...", "o": "Instalar os módulos de brinquedos integrados a um projeto de ambientação e paisagismo que valorize a natureza local e componha um espaço de brincar coerente com a proposta educativa e socioambiental da unidade. O cumprimento desse objetivo se fará...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0}, {"id": "1957", "n": "RESIDÊNCIA LITERÁRIA", "d": "O projeto Residência Literária se constitui em duas frentes: a escolha de um autor/autora para residir em Paraty durante três meses visando finalizar um projeto literário. Em contrapartida, o autor/autora escolhido/a oferecerá uma oficina de escrita criativa, no Polo Sociocultural, para moradores...", "o": "Apoiar a produção de autores brasileiros e promover o intercâmbio literário entre escritores e leitores por meio de residências em Paraty, articulando práticas de criação, mediação e formação leitora com a realidade sociocultural do território.", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Oficina - Escrita literária"], "tp": 25, "ts": 1, "or": 91600.0}, {"id": "2367", "n": "ROTAS DA MEMÓRIA - 80 ANOS SESC", "d": "A exposição integra as celebrações dos 80 anos do Sesc, destacando o comércio como espaço de encontros, trocas e construção coletiva. Mais do que a circulação de mercadorias, o comércio carrega histórias de convivência, saberes e afetos, conectando culturas e modos de vida. Partindo de Paraty como...", "o": "Valorizar e difundir a memória social ligada ao comércio em Paraty através de uma exposição, destacando-o como espaço de encontros, trocas e construção coletiva de saberes, culturas e afetos. A proposta busca aproximar a clientela preferencial do...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição"], "tp": 25000, "ts": 1, "or": 876424.0}, {"id": "2227", "n": "SESC LABMAIS - LABORATÓRIO SESC DE ARTES, MÍDIAS, TECNOLOGIAS E JUVENTUDES", "d": "O projeto configura-se como um espaço educativo e cultural do Sesc Paraty voltado a jovens trabalhadores do comércio de bens, serviços e turismo, e comunidades em situação de vulnerabilidade social. Promove o protagonismo juvenil por meio de ações formativas em arte, cultura e novas mídias, com...", "o": "Proporcionar às juventudes, especialmente aos jovens trabalhadores do comércio, bens, serviços e turismo, processos formativos, experiências criativas e sensibilização artística, promovendo a cultura digital, a difusão e a produção cultural como...", "u": "CABORÊ", "a": ["Arte Educação"], "st": ["Curso", "Oficina", "Palestra"], "tp": 480, "ts": 18, "or": 533448.0}, {"id": "2335", "n": "SESC MEDIAÇÕES 2026", "d": "Sesc Mediações 2026 promove ações de mediação cultural comunitária, ampliando o acesso e mobilizando públicos por meio de visitas mediadas, rodas de conversa, articulação territorial e oferta de traslado e alimentação. A acessibilidade é transversal, com Libras, audiodescrição, legendagem e ações...", "o": "Desenvolver ações de arte-educação em diálogo com as demais áreas que compõem o Programa Cultura, por meio de processos de mediação cultural e mobilização de públicos, com foco nos públicos prioritários do Sesc — como trabalhadores do comércio de...", "u": "CABORÊ", "a": ["Arte Educação"], "st": ["Mediação"], "tp": 750, "ts": 30, "or": 68463.64}, {"id": "2001", "n": "SESC NA FLIP", "d": "O projeto \"Sesc Paraty na FLIP 2026\" tem como propósito reafirmar o papel do Sesc no cenário cultural nacional, fortalecer a economia criativa local e ampliar o acesso à cultura por meio de uma programação diversa, acessível e conectada com os desafios contemporâneos. Com ações como Cafés...", "o": "O projeto tem como objetivo consolidar a presença do Sesc no cenário cultural nacional, fortalecendo o Polo Sociocultural Sesc Paraty como centro de referência em literatura, artes e formação cidadã. A atuação do Sesc reafirma seu compromisso com a...", "u": "SANTA RITA", "a": ["Literatura", "Música"], "st": ["Apresentação", "Mediação", "Oficina", "Palestra"], "tp": 510, "ts": 34, "or": 509543.06}, {"id": "2292", "n": "SONORA BRASIL 2026", "d": "O Sonora Brasil, na sua 28ª edição, é um dos maiores e mais longevos projetos de circulação musical em âmbito nacional, proporcionando a fruição, a criação e o intercâmbio entre artistas e público em apresentações musicais e ações educativas que difundem diversos gêneros e estilos, praticados em...", "o": "GERAL: Fruição musical através de um projeto com identidade nacional e gestão compartilhada que promove a diversidade cultural brasileira.  ESPECÌFICOS:- Apresentar as mais diversas manifestações culturais do país por meio de programas inéditos e...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação", "Oficina"], "tp": 1060, "ts": 8, "or": 420222.0}, {"id": "2157", "n": "TEATRALIDADES", "d": "A ação de incentivo a produção e fruição artística local em teatro, dança, circo, performance e formas animadas, voltada a diferentes faixas etárias. Com programação regular, contribui para a formação de público da nova unidade Sesc Caborê, priorizando trabalhadores do comércio, bens e turismo....", "o": "Promover o acesso à cultura por meio do incentivo à produção e fruição artística local, contribuindo para a formação de público da unidade Sesc Caborê, com foco nos trabalhadores do comércio, bens e turismo e em diferentes faixas etárias da...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Teatro", "Intercâmbio - Teatro"], "tp": 940, "ts": 12, "or": 454370.0}, {"id": "1675", "n": "TERRITÓRIOS DO PENSAR", "d": "O projeto Territórios do Pensar tem como objetivo fortalecer o diálogo com as comunidades, entendendo o Sesc como parte ativa da realidade social e cultural do Brasil. Para isso, promove debates, oficinas, atividades artísticas e ações voltadas à valorização da memória local. A proposta é ampliar...", "o": "Fortalecer o diálogo entre literatura, filosofia e território por meio de ciclos de leitura, encontros com autores e atividades formativas, com foco em estudantes da rede pública e dependentes da clientela preferencial, estimulando o pensamento...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Apresentação", "Mediação", "Oficina"], "tp": 2408, "ts": 27, "or": 386660.0}, {"id": "2183", "n": "TODA MÚSICA", "d": "O projeto cultural Toda Música, desenvolvido em Paraty, tem como objetivo promover a formação artística e a ampliação do público local, com ênfase na linguagem musical. A iniciativa busca fortalecer a participação da comunidade estabelecendo vínculos entre os moradores e as apresentações musicais....", "o": "OBJETIVO GERAL A programação em música do Polo Sociocultural Sesc Paraty visa contribuir para o desenvolvimento da cena cultural da cidade de Paraty por meio da oferta de programação sistemática e diversa, no campo da música, direcionada à população...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação"], "tp": 300, "ts": 6, "or": 147046.15}, {"id": "2162", "n": "VOZES DA MEMÓRIA", "d": "Vozes da Memória é uma atividade formativa de Trabalho Social com Pessoas Idosas (TSPI), em parceria com a Gerência de Assistência (GEA), no formato transdiciplinar para desenvolvimento de ações formativas e de fruição para público 60+, na linguagem de Artes Cênicas. Promove convívio social,...", "o": "Promover o convívio social e a valorização da maturidade por meio de ações artísticas transdisciplinares voltadas a pessoas idosas, integrando linguagens artísticas com foco no bem-estar, na autoestima e na valorização da memória e patrimônio...", "u": "CABORÊ", "a": ["Artes Cênicas", "Memória Social e Patrimônio Cultural", "Trabalho Social com Grupos"], "st": ["Apresentação - Idosos", "Curso - Teatro", "Exposição"], "tp": 119190, "ts": 3, "or": 404300.0}];
+let PROJETOS = [{"id": "1951", "n": "ARTE DA PALAVRA - PSC", "d": "O projeto é constituído por ações formativas e de fruição literária, voltado para alunos da rede pública e interessados em leitura. Foi criado, em 2017, pelo Departamento Nacional dentro do PAP - Plano de Ações Prioritárias. É composto pelas seguintes realizações:Circuito de Autores – circuito...", "o": "Circuito de Criação Literária:Estimular a criação literária e a formação de novos escritores por meio da realização de oficinas do projeto Arte da Palavra, promovendo o acesso à literatura como ferramenta de expressão e desenvolvimento pessoal entre...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Oficina"], "tp": 375, "ts": 9, "or": 128600.0, "pf": ["Difusão"]}, {"id": "2244", "n": "ARTES VISUAIS - EXPOSIÇÕES CABORÊ", "d": "Realização de três exposições com propostas acessíveis e acolhedoras que valorizam a diversidade de vozes e práticas das artes visuais contemporâneas, especialmente aquelas que exploram as relações entre ciência e paisagem. Voltadas prioritariamente aos comerciários de Paraty e seus dependentes, as...", "o": "Oferecer à população de Paraty experiências expositivas diversificadas e acessíveis nos espaços do Sesc Caborê, promovendo o contato com diferentes linguagens das artes visuais e fortalecendo a dimensão educativa da visitação.", "u": "CABORÊ", "a": ["Artes Visuais"], "st": ["Exposição"], "tp": 10000, "ts": 2, "or": 848200.0, "pf": ["Difusão", "Formação", "Pesquisa"]}, {"id": "2258", "n": "ARTES VISUAIS - FORMAÇÃO E PESQUISA", "d": "O projeto Formação e Pesquisa em Artes Visuais do Sesc Paraty promove a fruição e a produção artística para diferentes públicos, articulando formação, pesquisa e vivências. Por meio de cursos de desenho, cerâmica e bordado, oficinas vinculadas a exposições, Ateliê Aberto e residências artísticas, o...", "o": "Fomentar a pesquisa e a formação continuada no campo das Artes Visuais, reconhecendo o papel transformador da cultura na construção de uma sociedade mais justa, igualitária e sustentável. Essa diretriz fortalece o compromisso do Sesc com a...", "u": "CABORÊ", "a": ["Artes Visuais"], "st": ["Curso", "Exposição", "Oficina", "Palestra", "Residência artística"], "tp": 1380, "ts": 20, "or": 512520.0, "pf": ["Formação", "Pesquisa"]}, {"id": "2861", "n": "AÇÕES FORMATIVAS EM MÚSICA", "d": "A programação de cursos de música do Sesc Caborê para 2026 visa a iniciação musical, atraindo diversos públicos. Pensada também como uma oportunidade de bem-estar, expressão e lazer para os trabalhadores do comércio e seus familiares, a programação oferece cursos introdutórios que não exigem...", "o": "GERAL: O projeto de cursos de música do Sesc Caborê para 2026 tem como objetivo promover a iniciação musical e atrair diversos públicos. A proposta é oferecer cursos que não exigem experiência prévia, proporcionando uma introdução ao universo...", "u": "CABORÊ", "a": ["Música"], "st": ["Curso", "Oficina"], "tp": 165, "ts": 30, "or": 637200.0, "pf": ["Formação"]}, {"id": "2362", "n": "CASA DO PATRIMÔNIO", "d": "A Casa do Patrimônio de Paraty atua na preservação, salvaguarda e difusão do patrimônio cultural, em diálogo direto com o território. Estruturado a partir de ações compartilhadas de formação, mediação cultural e educação patrimonial, o projeto promove o reconhecimento e a valorização das múltiplas...", "o": "Desenvolver ações formativas e mediadas a partir de parcerias estratégicas com instituições do campo do patrimônio e da cultura, fortalecendo a atuação territorial do Polo Sociocultural Sesc Paraty e ampliando o acesso da clientela preferencial a...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição", "Oficina", "Palestra"], "tp": 37550, "ts": 47, "or": 891400.0, "pf": ["Pesquisa"]}, {"id": "2286", "n": "CINE SESC 2026", "d": "O Cine Sesc integra as ações do Polo Sociocultural Sesc Paraty, promovendo o acesso à linguagem audiovisual por meio de exibições de filmes, mediação cultural e atividades arte-educativas. Voltado à formação de públicos e à valorização do cinema como expressão artística, o projeto tem como...", "o": "Ampliar o acesso à linguagem audiovisual por meio de uma programação contínua de cinema, promovendo a formação de público, a reflexão crítica e a valorização da diversidade estética. O projeto tem como foco os trabalhadores do comércio de bens,...", "u": "SANTA RITA", "a": ["Audiovisual"], "st": ["Debate", "Exibição"], "tp": 2525, "ts": 179, "or": 84296.0, "pf": ["Difusão"]}, {"id": "2293", "n": "CINE SESC MIRIM 2026", "d": "Cine Sesc Mirim é um projeto voltado à formação cultural de crianças e adolescentes por meio de sessões de cinema com mediação e atividades arte-educativas. De agosto a novembro de 2026, realizará sessões mensais em espaços externos e na Unidade Santa Rita, ativando filmes do acervo Cine Sesc 2026...", "o": "Promover a formação cultural de crianças e adolescentes por meio da exibição de filmes infanto-juvenis com mediação e atividades arte-educativas, ampliando o acesso ao cinema e à reflexão crítica em territórios com pouca oferta de equipamentos...", "u": "SANTA RITA", "a": ["Audiovisual"], "st": ["Exibição", "Mediação", "Oficina"], "tp": 860, "ts": 35, "or": 96774.0, "pf": ["Difusão"]}, {"id": "2114", "n": "CIRCOLADÔ", "d": "Circoladô é uma ação formativa para crianças e jovens, especialmente dependentes de comerciários, que utiliza o circo social para estimular criatividade, expressão corporal, coordenação, concentração e trabalho em equipe. Promove aprendizagem lúdica e desenvolvimento social, emocional e cognitivo,...", "o": "Desenvolver habilidades de expressão, coordenação motora, concentração e imaginação entre crianças e jovens por meio de oficinas de circo social, promovendo o lúdico e a convivência em grupo, com foco na inclusão da clientela preferencial.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Circo", "Curso - Circo"], "tp": 2560, "ts": 8, "or": 233820.0, "pf": ["Formação", "Difusão"]}, {"id": "1697", "n": "CIRCUITO SESC DE CORRIDAS - PARATY 2026", "d": "A Etapa Paraty do Circuito Sesc de Corridas integra o projeto nacional do Sesc que padroniza e qualifica provas de corrida em todo o país. Com identidade visual unificada e diretrizes comuns, respeita as particularidades locais. Em Paraty, a prova valoriza o contexto histórico, cultural e natural...", "o": "Realizar a etapa local do Circuito Sesc de Corridas, promovendo a participação ativa da comunidade em evento esportivo de grande alcance, com foco na clientela preferencial e na prática segura de atividade física.", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0, "pf": ["Difusão"]}, {"id": "2076", "n": "CLUBE DA CORRIDA", "d": "O Clube de Corrida do Sesc Caborê – Paraty é uma iniciativa voltada à promoção da atividade física regular por meio da prática orientada da corrida de rua. A proposta é oferecer encontros semanais com acompanhamento profissional, estímulo à participação em eventos esportivos e ações educativas...", "o": "Implantar e manter um Clube de Corrida no Sesc Caborê, oferecendo à população de Paraty uma oportunidade contínua e acessível de prática orientada de corrida e caminhada, contribuindo para a melhoria da qualidade de vida, o fortalecimento de...", "u": "CABORÊ", "a": ["Desenvolvimento Físico-Esportivo"], "st": [], "tp": 40, "ts": 2, "or": 179800.0, "pf": ["Formação"]}, {"id": "1953", "n": "CLUBE SESC DE LEITORES", "d": "O Clube Sesc de Leitores, ação regular desde 2018, promove o hábito cotidiano da leitura, destacando que não há escrita sem leitura. Em 2026, realizará cinco ciclos de três semanas, com encontros semanais e participação do/a autor/a no encerramento. A curadoria seguirá conectada ao contexto...", "o": "O objetivo central é formar novos leitores, principalmente dentro do nosso público preferencial, e ampliar o repertório crítico dos participantes, promovendo a leitura como prática cultural e ferramenta de pertencimento. Para isso, o projeto realiza...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Debate", "Mediação"], "tp": 5375, "ts": 495, "or": 315390.0, "pf": ["Difusão"]}, {"id": "2093", "n": "DANÇAS LIVRES", "d": "Danças Livres é uma ação formativa regular voltada ao público preferencial do Sesc, com foco na promoção da qualidade de vida e do bem-estar físico e emocional por meio da expressão corporal. Com metodologia baseada na consciência corporal e no movimento espontâneo, a atividade valoriza o...", "o": "Promover o bem-estar físico e emocional dos participantes por meio de práticas regulares de dança, estimulando a criatividade corporal, o autoconhecimento e a integração entre os participantes, com atenção à inclusão de trabalhadores do comércio.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Curso - Dança"], "tp": 330, "ts": 2, "or": 167020.0, "pf": ["Formação"]}, {"id": "2043", "n": "DANÇAS SOCIAIS", "d": "Danças Sociais é uma atividade formativa regular voltada ao público preferencial do Sesc – trabalhadores do comércio de bens, serviços e turismo e seus dependentes. A proposta contempla a vivência de danças sociais brasileiras, como samba de gafieira, forró, maxixe, lambada e danças...", "o": "Geral: Mobilizar e formar o público preferencial do Sesc por meio de atividades regulares em danças sociais brasileiras, promovendo a socialização, o bem-estar e a valorização cultural.Específicos:Estimular o convívio e a interação entre...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Curso - Dança"], "tp": 1290, "ts": 5, "or": 172370.0, "pf": ["Formação"]}, {"id": "2120", "n": "DECANTO DE DANÇA", "d": "Decanto de Dança incentiva o contato com a dança valorizando o corpo integrado ao espaço e à identidade cultural de Paraty. Foca nas performances tradicionais e memórias locais, promovendo conexão com expressões regionais e ampliando a compreensão do corpo como símbolo cultural e histórico,...", "o": "Fomentar as expressões corporais negras e indígenas da localidade por meio da realização de ações artísticas, formações e apresentações públicas, promovendo a valorização das corporeidades plurais e a ampliação do repertório estético do público...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Desenvolvimento de experimentações - Dança", "Intercâmbio - Dança"], "tp": 550, "ts": 11, "or": 234700.0, "pf": ["Experimentação"]}, {"id": "2359", "n": "EDUCAÇÃO PATRIMONIAL E TURISMO SOCIAL", "d": "O projeto Educação Patrimonial e Turismo Social é uma iniciativa que transforma o patrimônio cultural e a biodiversidade de Paraty em experiências educativas e turísticas que promovem pertencimento, inclusão e uso sustentável do território. Em 2026, o projeto conecta os resultados dos levantamentos...", "o": "Desdobrar e ações efetivas os conhecimentos culturais e ambientais sistematizados no ciclo Levantes Daqui em roteiros sustentáveis, processos formativos e vivências mediadas voltadas ao turismo social e à educação patrimonial, promovendo o...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural", "Turismo Social"], "st": ["Cartografia Social", "Curso", "Inventário Participativo", "Passeios - Receptivo", "Vivência"], "tp": 1215, "ts": 41, "or": 559500.0, "pf": ["Pesquisa"]}, {"id": "1952", "n": "ESPAÇO CRIATIVO MAKER", "d": "Implantação do Espaço Criativo Maker da Unidade Sesc Caborê - Av. Otávio Gama, 1709 - Caborê em Paraty/RJ incluindo a aquisição de equipamentos, materiais e a oferta de atividades.", "o": "Objetivo geral: Implantar gradualmente o espaço maker, permitindo ajustes e integração progressiva dos recursos ao território desmistificando o uso do espaço por inteiro.Objetivos Específicos:•\tDefinir layout do espaço e organização do espaço...", "u": "CABORÊ", "a": ["Educação Ampliada"], "st": ["Oficina"], "tp": 50, "ts": 2, "or": 280000.0, "pf": ["Formação"]}, {"id": "2862", "n": "ESTÚDIO CABORÊ", "d": "A partir de 2026, o Sesc Caborê contará com um estúdio de música integrado à sua estrutura. Neste primeiro ano de funcionamento, a proposta é explorar o potencial desse novo espaço como ferramenta de apoio e complementação das atividades já existentes na programação do Polo.Com base em um...", "o": "GERAL: Implementar e operar um estúdio de gravação no Sesc Caborê, com foco na produção de conteúdos que fortaleçam, documentem e ampliem o alcance da programação e das ações desenvolvidas pela unidade.OBJETIVOS ESPECÍFICOS:Registrar e documentar...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0, "pf": ["Experimentação"]}, {"id": "2297", "n": "EXERCÍCIOS REGULARES", "d": "O projeto visa implantar regularmente as atividades de Alongamento, Yoga e Pilates Solo no Sesc Caborê, em Paraty, a partir de 2026. As práticas serão oferecidas como parte da programação permanente da unidade, com foco na promoção do bem-estar. As aulas ocorrerão em espaço reservado com estrutura...", "o": "Oferecer à comunidade de Paraty oportunidades regulares de participação em atividades físicas orientadas, por meio das modalidades de Alongamento, Yoga e Pilates Solo, promovendo saúde, bem-estar e qualidade de vida, alinhadas à missão educativa e...", "u": "CABORÊ", "a": ["Desenvolvimento Físico-Esportivo"], "st": [], "tp": 120, "ts": 6, "or": 244250.0, "pf": ["Formação"]}, {"id": "2356", "n": "FAZERES DAQUI", "d": "O Fazeres Daqui é um projeto que reafirma o compromisso do Sesc com a preservação e a valorização do patrimônio cultural como direito, linguagem e recurso estratégico para a construção de identidades, pertencimento e cidadania. Inserido no ciclo de Memória Social e Patrimônio, o projeto atua como...", "o": "Desdobramento  dos levantamentos e registros realizados pelo Levantes Daqui em experiências culturais, educativas e sensoriais que aproximem trabalhadores do comércio, seus dependentes e comunidades locais da preservação e valorização do patrimônio...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição", "Oficina", "Vivência"], "tp": 30550, "ts": 22, "or": 898700.0, "pf": ["Pesquisa"]}, {"id": "2070", "n": "HUB CONECTA IMPACTA - POLOS – ESPAÇO DE EXPERIMETAÇÃO E PROTOTIPAGEM DO ECOSSISTEMA SESC DE INOVAÇÃO", "d": "O Conecta Integra Polos é uma iniciativa estratégica do Departamento Nacional do Sesc que visa integrar os três polos de referência em uma rede colaborativa, fortalecendo a troca de conhecimentos, a experimentação conjunta e a aplicação das melhores práticas institucionais. Por meio de encontros...", "o": "Geral: Integrar os polos de referência do Departamento Nacional em uma rede colaborativa que favoreça a experimentação, a inovação e o compartilhamento de metodologias e protocolos.Específicos:Criar um calendário anual de encontros técnicos e...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0, "pf": ["Experimentação"]}, {"id": "2350", "n": "LEVANTES DAQUI", "d": "O Levantes Daqui valoriza o patrimônio cultural de Paraty como vetor de desenvolvimento econômico, turístico e social. Por meio de inventário participativo, registros etnográficos, ações formativas e mediadas, o projeto promove a preservação, circulação e continuidade de saberes tradicionais,...", "o": "O objetivo do Levantes Daqui é valorizar, registrar e mobilizar o patrimônio cultural de Paraty por meio de ações participativas, inventário, pesquisa e formação, fortalecendo a identidade territorial e promovendo a preservação e circulação de...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Cartografia Social", "Debate", "Inventário Participativo", "Mediação", "Oficina", "Palestra", "Roda de Conversa", "Vivência"], "tp": 2930, "ts": 84, "or": 502069.16, "pf": ["Pesquisa"]}, {"id": "2196", "n": "MINHA MÚSICA", "d": "O projeto “Minha Música” promove a diversidade musical em Paraty, destacando as histórias pessoais e afetivas que se conectam à música no cotidiano da cidade. A iniciativa investiga a relação entre música e a vida dos trabalhadores do comércio local, registrando suas memórias e experiências em uma...", "o": "O objetivo geral do projeto Minha Música é promover a valorização das histórias e memórias musicais dos trabalhadores do comércio, serviços e turismo de Paraty, por meio da criação de um acervo audiovisual e de audições musicais que fortaleçam a...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação", "Palestra"], "tp": 400, "ts": 10, "or": 182000.0, "pf": ["Experimentação"]}, {"id": "2365", "n": "MUTUÁ  EM AÇÕES", "d": "Realizado bienalmente no Polo Sociocultural Sesc Paraty, o Festival Mutuá promove cultura, patrimônio e artes em diálogo com o território de Paraty. Entre uma edição e outra, o Sesc desenvolve o Mutuá em Ações, por meio de atividades regulares com a comunidade, envolvendo diversas linguagens...", "o": "Valorizar as identidades culturais locais, fomentando a diversidade, a inclusão e o diálogo entre diferentes expressões artísticas. Estimular a formação e o intercâmbio entre artistas, agentes culturais, comunidade e equipes dos Departamentos...", "u": "CABORÊ", "a": ["Arte Educação", "Artes Cênicas", "Artes Visuais", "Literatura", "Memória Social e Patrimônio Cultural", "Música"], "st": ["Oficina", "Oficina - Dança", "Oficina - Escrita literária", "Palestra"], "tp": 890, "ts": 31, "or": 405080.0, "pf": ["Experimentação"]}, {"id": "2311", "n": "NA REAL 2026", "d": "O projeto Na Real 2026, será desenvolvido pelo Polo Sociocultural (PSC) e Trabalho Social com Grupos (TSG), visa fomentar ações criadas por e para jovens, por meio de um percurso formativo que combina oficinas e conteúdos teórico com vivências práticas no território. As temáticas principais a serem...", "o": "Promover percursos formativos voltados às juventudes de Paraty, articulando saberes territoriais, cultura digital, empreendedorismo e inovação social, com foco no fortalecimento da autonomia, do protagonismo juvenil e da inclusão da clientela...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0, "pf": ["Experimentação"]}, {"id": "2011", "n": "PALCO GIRATÓRIO - RESIDÊNCIAS ARTÍSTICAS", "d": "Na 28ª edição, o Palco Giratório é o maior e mais longevo projeto nacional de circulação de espetáculos em Artes Cênicas. Nesta edição promove residências artísticas com foco em territórios de baixa renda e vulnerabilidade social, para fortalecer a acessibilidade cultural, prioritariamente ao...", "o": "Fortalecer a difusão das artes cênicas e o intercâmbio cultural entre artistas e comunidades por meio da participação do PSC no Circuito Nacional Palco Giratório, promovendo o acesso da população local a espetáculos e ações formativas de qualidade.", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Dança", "Residência artística - Dança"], "tp": 330, "ts": 2, "or": 405156.0, "pf": ["Difusão"]}, {"id": "2095", "n": "PLAYGROUND -TERRITÓRIO BRINCANTE", "d": "Projeto que prevê a instalação de brinquedos e ambientação paisagística em área externa, na Unidade do Sesc Caborê. A proposta tem como conceito estruturante a ideia de espaços naturalizados, que se traduzem na criação de ambientes lúdicos compostos por elementos como madeira, areia, água,...", "o": "Instalar os módulos de brinquedos integrados a um projeto de ambientação e paisagismo que valorize a natureza local e componha um espaço de brincar coerente com a proposta educativa e socioambiental da unidade. O cumprimento desse objetivo se fará...", "u": "CABORÊ", "a": [], "st": [], "tp": 0, "ts": 0, "or": 0, "pf": ["Difusão"]}, {"id": "1957", "n": "RESIDÊNCIA LITERÁRIA", "d": "O projeto Residência Literária se constitui em duas frentes: a escolha de um autor/autora para residir em Paraty durante três meses visando finalizar um projeto literário. Em contrapartida, o autor/autora escolhido/a oferecerá uma oficina de escrita criativa, no Polo Sociocultural, para moradores...", "o": "Apoiar a produção de autores brasileiros e promover o intercâmbio literário entre escritores e leitores por meio de residências em Paraty, articulando práticas de criação, mediação e formação leitora com a realidade sociocultural do território.", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Oficina - Escrita literária"], "tp": 25, "ts": 1, "or": 91600.0, "pf": ["Experimentação"]}, {"id": "2367", "n": "ROTAS DA MEMÓRIA - 80 ANOS SESC", "d": "A exposição integra as celebrações dos 80 anos do Sesc, destacando o comércio como espaço de encontros, trocas e construção coletiva. Mais do que a circulação de mercadorias, o comércio carrega histórias de convivência, saberes e afetos, conectando culturas e modos de vida. Partindo de Paraty como...", "o": "Valorizar e difundir a memória social ligada ao comércio em Paraty através de uma exposição, destacando-o como espaço de encontros, trocas e construção coletiva de saberes, culturas e afetos. A proposta busca aproximar a clientela preferencial do...", "u": "SANTA RITA", "a": ["Memória Social e Patrimônio Cultural"], "st": ["Exposição"], "tp": 25000, "ts": 1, "or": 876424.0, "pf": ["Difusão"]}, {"id": "2227", "n": "SESC LABMAIS - LABORATÓRIO SESC DE ARTES, MÍDIAS, TECNOLOGIAS E JUVENTUDES", "d": "O projeto configura-se como um espaço educativo e cultural do Sesc Paraty voltado a jovens trabalhadores do comércio de bens, serviços e turismo, e comunidades em situação de vulnerabilidade social. Promove o protagonismo juvenil por meio de ações formativas em arte, cultura e novas mídias, com...", "o": "Proporcionar às juventudes, especialmente aos jovens trabalhadores do comércio, bens, serviços e turismo, processos formativos, experiências criativas e sensibilização artística, promovendo a cultura digital, a difusão e a produção cultural como...", "u": "CABORÊ", "a": ["Arte Educação"], "st": ["Curso", "Oficina", "Palestra"], "tp": 480, "ts": 18, "or": 533448.0, "pf": ["Formação"]}, {"id": "2335", "n": "SESC MEDIAÇÕES 2026", "d": "Sesc Mediações 2026 promove ações de mediação cultural comunitária, ampliando o acesso e mobilizando públicos por meio de visitas mediadas, rodas de conversa, articulação territorial e oferta de traslado e alimentação. A acessibilidade é transversal, com Libras, audiodescrição, legendagem e ações...", "o": "Desenvolver ações de arte-educação em diálogo com as demais áreas que compõem o Programa Cultura, por meio de processos de mediação cultural e mobilização de públicos, com foco nos públicos prioritários do Sesc — como trabalhadores do comércio de...", "u": "CABORÊ", "a": ["Arte Educação"], "st": ["Mediação"], "tp": 750, "ts": 30, "or": 68463.64, "pf": ["Difusão"]}, {"id": "2001", "n": "SESC NA FLIP", "d": "O projeto \"Sesc Paraty na FLIP 2026\" tem como propósito reafirmar o papel do Sesc no cenário cultural nacional, fortalecer a economia criativa local e ampliar o acesso à cultura por meio de uma programação diversa, acessível e conectada com os desafios contemporâneos. Com ações como Cafés...", "o": "O projeto tem como objetivo consolidar a presença do Sesc no cenário cultural nacional, fortalecendo o Polo Sociocultural Sesc Paraty como centro de referência em literatura, artes e formação cidadã. A atuação do Sesc reafirma seu compromisso com a...", "u": "SANTA RITA", "a": ["Literatura", "Música"], "st": ["Apresentação", "Mediação", "Oficina", "Palestra"], "tp": 510, "ts": 34, "or": 509543.06, "pf": ["Difusão"]}, {"id": "2292", "n": "SONORA BRASIL 2026", "d": "O Sonora Brasil, na sua 28ª edição, é um dos maiores e mais longevos projetos de circulação musical em âmbito nacional, proporcionando a fruição, a criação e o intercâmbio entre artistas e público em apresentações musicais e ações educativas que difundem diversos gêneros e estilos, praticados em...", "o": "GERAL: Fruição musical através de um projeto com identidade nacional e gestão compartilhada que promove a diversidade cultural brasileira.  ESPECÌFICOS:- Apresentar as mais diversas manifestações culturais do país por meio de programas inéditos e...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação", "Oficina"], "tp": 1060, "ts": 8, "or": 420222.0, "pf": ["Difusão"]}, {"id": "2157", "n": "TEATRALIDADES", "d": "A ação de incentivo a produção e fruição artística local em teatro, dança, circo, performance e formas animadas, voltada a diferentes faixas etárias. Com programação regular, contribui para a formação de público da nova unidade Sesc Caborê, priorizando trabalhadores do comércio, bens e turismo....", "o": "Promover o acesso à cultura por meio do incentivo à produção e fruição artística local, contribuindo para a formação de público da unidade Sesc Caborê, com foco nos trabalhadores do comércio, bens e turismo e em diferentes faixas etárias da...", "u": "CABORÊ", "a": ["Artes Cênicas"], "st": ["Apresentação - Teatro", "Intercâmbio - Teatro"], "tp": 940, "ts": 12, "or": 454370.0, "pf": ["Difusão"]}, {"id": "1675", "n": "TERRITÓRIOS DO PENSAR", "d": "O projeto Territórios do Pensar tem como objetivo fortalecer o diálogo com as comunidades, entendendo o Sesc como parte ativa da realidade social e cultural do Brasil. Para isso, promove debates, oficinas, atividades artísticas e ações voltadas à valorização da memória local. A proposta é ampliar...", "o": "Fortalecer o diálogo entre literatura, filosofia e território por meio de ciclos de leitura, encontros com autores e atividades formativas, com foco em estudantes da rede pública e dependentes da clientela preferencial, estimulando o pensamento...", "u": "SANTA RITA", "a": ["Literatura"], "st": ["Apresentação", "Mediação", "Oficina"], "tp": 2408, "ts": 27, "or": 386660.0, "pf": ["Formação"]}, {"id": "2183", "n": "TODA MÚSICA", "d": "O projeto cultural Toda Música, desenvolvido em Paraty, tem como objetivo promover a formação artística e a ampliação do público local, com ênfase na linguagem musical. A iniciativa busca fortalecer a participação da comunidade estabelecendo vínculos entre os moradores e as apresentações musicais....", "o": "OBJETIVO GERAL A programação em música do Polo Sociocultural Sesc Paraty visa contribuir para o desenvolvimento da cena cultural da cidade de Paraty por meio da oferta de programação sistemática e diversa, no campo da música, direcionada à população...", "u": "CABORÊ", "a": ["Música"], "st": ["Apresentação"], "tp": 300, "ts": 6, "or": 147046.15, "pf": ["Difusão"]}, {"id": "2162", "n": "VOZES DA MEMÓRIA", "d": "Vozes da Memória é uma atividade formativa de Trabalho Social com Pessoas Idosas (TSPI), em parceria com a Gerência de Assistência (GEA), no formato transdiciplinar para desenvolvimento de ações formativas e de fruição para público 60+, na linguagem de Artes Cênicas. Promove convívio social,...", "o": "Promover o convívio social e a valorização da maturidade por meio de ações artísticas transdisciplinares voltadas a pessoas idosas, integrando linguagens artísticas com foco no bem-estar, na autoestima e na valorização da memória e patrimônio...", "u": "CABORÊ", "a": ["Artes Cênicas", "Memória Social e Patrimônio Cultural", "Trabalho Social com Grupos"], "st": ["Apresentação - Idosos", "Curso - Teatro", "Exposição"], "tp": 119190, "ts": 3, "or": 404300.0, "pf": ["Formação"]}];
 
 // ═══════════════════════════════════════
 // AREA CONFIG
@@ -898,6 +1031,8 @@ function fmtBRL(n) {
 
 function titleCase(str) {
   if (!str) return '';
+  // Se o nome não é todo uppercase, já está formatado (veio do CSV)
+  if (str !== str.toUpperCase()) return str;
   const lower = ['da', 'de', 'do', 'das', 'dos', 'e', 'em', 'a', 'o', 'à', 'ao', 'no', 'na', 'nos', 'nas', 'por', 'para', 'com', 'sem'];
   return str.split(/[\s]+/).map((w, i) => {
     const wl = w.toLowerCase();
@@ -912,20 +1047,24 @@ function titleCase(str) {
 // RENDER
 // ═══════════════════════════════════════
 let currentArea = 'Todos';
+let currentPortfolio = 'Todos';
 let currentUnit = 'todas';
 let searchTerm = '';
 
 function getFiltered() {
   return PROJETOS.filter(p => {
+    if (currentPortfolio !== 'Todos') {
+      if (!p.pf || !p.pf.includes(currentPortfolio)) return false;
+    }
     if (currentArea !== 'Todos') {
       if (!p.a || !p.a.includes(currentArea)) return false;
     }
     if (currentUnit !== 'todas') {
-      if (p.u !== currentUnit) return false;
+      if (p.u.toUpperCase() !== currentUnit.toUpperCase()) return false;
     }
     if (searchTerm) {
       const s = searchTerm.toLowerCase();
-      const haystack = (p.n + ' ' + p.d + ' ' + (p.a||[]).join(' ')).toLowerCase();
+      const haystack = (p.n + ' ' + p.d + ' ' + (p.a||[]).join(' ') + ' ' + (p.pf||[]).join(' ')).toLowerCase();
       if (!haystack.includes(s)) return false;
     }
     return true;
@@ -947,18 +1086,18 @@ function renderCards() {
   grid.innerHTML = filtered.map((p, i) => {
     const cfg = getAreaConfig(p.a);
     const areaLabel = getAreaLabel(p.a);
-    const unitLabel = p.u === 'CABORÊ' ? 'Caborê' : (p.u === 'SANTA RITA' ? 'Santa Rita' : p.u);
+    const unitLabel = p.u.toUpperCase().includes('CABOR') ? 'Caborê' : (p.u.toUpperCase().includes('SANTA') ? 'Santa Rita' : p.u);
     const name = titleCase(p.n);
     const delay = Math.min(i * 0.04, 0.4);
 
-    const slug = getSlug(p.n);
+    const slug = p.slug || getSlug(p.n);
 
     return `
       <div class="project-card" onclick="window.location.href='projeto.html?id=${slug}'" style="animation-delay:${delay}s">
         <div class="card-visual" style="background:${cfg.bg}" id="vis-${p.id}">
-          <div class="visual-pattern">${genPattern(p.a?.[0], parseInt(p.id))}</div>
+          <div class="visual-pattern">${genPattern(p.a?.[0], parseInt(p.id) || 0)}</div>
           <div class="visual-icon">${cfg.icon}</div>
-          <img class="card-cover" src="${getCapaUrl(p.n)}" alt="" loading="lazy"
+          <img class="card-cover" src="${IMG_BASE}/${slug}/capa.jpg" alt="" loading="lazy"
                onerror="this.remove()"
                onload="this.parentNode.querySelector('.visual-pattern').style.display='none'; this.parentNode.querySelector('.visual-icon').style.display='none';">
           <div class="visual-area-label">${areaLabel}</div>
@@ -967,10 +1106,10 @@ function renderCards() {
         <div class="card-body">
           <div class="card-title">${name}</div>
           <div class="card-desc">${p.d || 'Descrição em elaboração.'}</div>
-          ${(p.tp || p.ts) ? `
+          ${(p.tp || (p.pf && p.pf.length)) ? `
           <div class="card-meta">
             ${p.tp ? `<div class="card-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><strong>${fmtNum(p.tp)}</strong> pessoas</div>` : ''}
-            ${p.ts ? `<div class="card-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><strong>${p.ts}</strong> serviços</div>` : ''}
+            ${(p.pf && p.pf.length) ? p.pf.map(pf => `<div class="card-meta-item"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${PORTFOLIO_CONFIG[pf] || '#94a3b8'};"></span> ${pf}</div>`).join('') : ''}
           </div>` : ''}
         </div>
       </div>
@@ -979,49 +1118,109 @@ function renderCards() {
 }
 
 // ═══════════════════════════════════════
-// NAVIGATION
+// NAVIGATION — DROPDOWNS
 // ═══════════════════════════════════════
-function renderNav() {
-  const nav = document.getElementById('navBar');
-  // Count per area
-  const counts = { 'Todos': PROJETOS.length };
-  PROJETOS.forEach(p => {
-    (p.a || []).forEach(a => {
-      counts[a] = (counts[a] || 0) + 1;
-    });
-  });
+const PORTFOLIO_CONFIG = {
+  'Difusão': '#c2420c',
+  'Formação': '#0891b2',
+  'Experimentação': '#7c3aed',
+  'Pesquisa': '#15803d',
+};
 
-  const areas = ['Todos', ...Object.keys(AREA_CONFIG).filter(a => counts[a])];
-
-  nav.innerHTML = areas.map(a => {
-    const cfg = a === 'Todos' ? { cor: '#1a1715' } : (AREA_CONFIG[a] || DEFAULT_CONFIG);
-    const short = a === 'Memória Social e Patrimônio Cultural' ? 'Memória e Patrimônio' : a;
-    return `
-      <button class="nav-pill ${a === currentArea ? 'active' : ''}" onclick="setArea('${a}')">
-        ${a !== 'Todos' ? `<span class="pill-dot" style="background:${cfg.cor}"></span>` : ''}
-        ${short}
-        <span class="pill-count">${counts[a] || 0}</span>
-      </button>
-    `;
-  }).join('');
+function toggleDropdown(id) {
+  const el = document.getElementById(id);
+  const wasOpen = el.classList.contains('open');
+  // Fechar todos
+  document.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
 }
 
-function setArea(a) {
-  currentArea = a;
+// Fechar dropdowns ao clicar fora
+document.addEventListener('click', e => {
+  if (!e.target.closest('.filter-dropdown')) {
+    document.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
+  }
+});
+
+function renderNav() {
+  // Portfolio dropdown
+  const pfCounts = { 'Todos': PROJETOS.length };
+  PROJETOS.forEach(p => { (p.pf || []).forEach(pf => { pfCounts[pf] = (pfCounts[pf] || 0) + 1; }); });
+  const pfOrder = ['Todos', 'Difusão', 'Formação', 'Experimentação', 'Pesquisa'];
+  
+  document.getElementById('ddPortfolioMenu').innerHTML = pfOrder.filter(pf => pfCounts[pf]).map(pf => {
+    const cor = PORTFOLIO_CONFIG[pf] || '';
+    return `<button class="filter-option ${pf === currentPortfolio ? 'active' : ''}" onclick="setPortfolio('${pf}')">
+      ${cor ? `<span class="opt-dot" style="background:${cor}"></span>` : ''}
+      ${pf}
+      <span class="opt-count">${pfCounts[pf]}</span>
+    </button>`;
+  }).join('');
+
+  const pfBtn = document.querySelector('#ddPortfolio .filter-btn');
+  document.getElementById('ddPortfolioValue').textContent = currentPortfolio;
+  pfBtn.classList.toggle('has-filter', currentPortfolio !== 'Todos');
+
+  // Area dropdown
+  const areaCounts = { 'Todas': PROJETOS.length };
+  PROJETOS.forEach(p => { (p.a || []).forEach(a => { areaCounts[a] = (areaCounts[a] || 0) + 1; }); });
+  const areaOrder = ['Todas', ...Object.keys(AREA_CONFIG).filter(a => areaCounts[a])];
+
+  document.getElementById('ddAreaMenu').innerHTML = areaOrder.map(a => {
+    const cfg = AREA_CONFIG[a] || {};
+    const short = a === 'Memória Social e Patrimônio Cultural' ? 'Memória e Patrimônio' : a;
+    const isActive = (a === 'Todas' && currentArea === 'Todos') || a === currentArea;
+    return `<button class="filter-option ${isActive ? 'active' : ''}" onclick="setArea('${a}')">
+      ${cfg.cor ? `<span class="opt-dot" style="background:${cfg.cor}"></span>` : ''}
+      ${short}
+      <span class="opt-count">${areaCounts[a]}</span>
+    </button>`;
+  }).join('');
+
+  const areaBtn = document.querySelector('#ddArea .filter-btn');
+  const areaDisplay = currentArea === 'Todos' ? 'Todas' : (currentArea === 'Memória Social e Patrimônio Cultural' ? 'Memória e Patrimônio' : currentArea);
+  document.getElementById('ddAreaValue').textContent = areaDisplay;
+  areaBtn.classList.toggle('has-filter', currentArea !== 'Todos');
+
+  // Unidade dropdown
+  const unitOptions = [
+    { value: 'todas', label: 'Todas' },
+    { value: 'CABORÊ', label: 'Caborê' },
+    { value: 'SANTA RITA', label: 'Santa Rita' },
+  ];
+
+  document.getElementById('ddUnidadeMenu').innerHTML = unitOptions.map(u => {
+    return `<button class="filter-option ${u.value === currentUnit ? 'active' : ''}" onclick="setUnit('${u.value}')">
+      ${u.label}
+    </button>`;
+  }).join('');
+
+  const unitBtn = document.querySelector('#ddUnidade .filter-btn');
+  const unitDisplay = currentUnit === 'todas' ? 'Todas' : (currentUnit === 'CABORÊ' ? 'Caborê' : 'Santa Rita');
+  document.getElementById('ddUnidadeValue').textContent = unitDisplay;
+  unitBtn.classList.toggle('has-filter', currentUnit !== 'todas');
+}
+
+function setPortfolio(pf) {
+  currentPortfolio = pf;
+  document.getElementById('ddPortfolio').classList.remove('open');
   renderNav();
   renderCards();
 }
 
-// ═══════════════════════════════════════
-// UNIT TOGGLE
-// ═══════════════════════════════════════
-document.getElementById('unitToggle').addEventListener('click', e => {
-  const btn = e.target.closest('.unit-btn');
-  if (!btn) return;
-  currentUnit = btn.dataset.unit;
-  document.querySelectorAll('.unit-btn').forEach(b => b.classList.toggle('active', b === btn));
+function setArea(a) {
+  currentArea = a === 'Todas' ? 'Todos' : a;
+  document.getElementById('ddArea').classList.remove('open');
+  renderNav();
   renderCards();
-});
+}
+
+function setUnit(u) {
+  currentUnit = u;
+  document.getElementById('ddUnidade').classList.remove('open');
+  renderNav();
+  renderCards();
+}
 
 // ═══════════════════════════════════════
 // SEARCH
@@ -1039,7 +1238,7 @@ function openModal(id) {
   if (!p) return;
   const cfg = getAreaConfig(p.a);
   const name = titleCase(p.n);
-  const unitLabel = p.u === 'CABORÊ' ? 'Caborê' : (p.u === 'SANTA RITA' ? 'Santa Rita' : p.u);
+  const unitLabel = p.u.toUpperCase().includes('CABOR') ? 'Caborê' : (p.u.toUpperCase().includes('SANTA') ? 'Santa Rita' : p.u);
 
   document.getElementById('modalContent').innerHTML = `
     <div class="modal-visual" style="background:${cfg.bg}">
@@ -1119,11 +1318,107 @@ function renderHeroStats() {
 }
 
 // ═══════════════════════════════════════
+// CSV LOADER (carrega do GitHub, fallback para dados embarcados)
+// ═══════════════════════════════════════
+const CSV_URL = 'https://antoniogarciacouto.github.io/psc2026/data/portfolio_2026.csv';
+
+function detectSeparator(text) {
+  const firstLine = text.split(/\r?\n/)[0];
+  const commas = (firstLine.match(/,/g) || []).length;
+  const semis = (firstLine.match(/;/g) || []).length;
+  return semis > commas ? ';' : ',';
+}
+
+function parseLine(line, sep) {
+  const fields = [];
+  let current = '', inQuotes = false;
+  for (let i = 0; i <= line.length; i++) {
+    const c = line[i];
+    if (i === line.length) {
+      fields.push(current);
+    } else if (c === '"') {
+      if (inQuotes && line[i+1] === '"') { current += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (c === sep && !inQuotes) {
+      fields.push(current); current = '';
+    } else {
+      current += c;
+    }
+  }
+  return fields;
+}
+
+function loadCSVData(text) {
+  const sep = detectSeparator(text);
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  if (lines.length < 2) return [];
+  const headers = parseLine(lines[0], sep).map(h => h.trim().toLowerCase().replace(/^\ufeff/, ''));
+  return lines.slice(1).map(line => {
+    const fields = parseLine(line, sep);
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (fields[i] || '').trim(); });
+    return obj;
+  }).filter(obj => Object.values(obj).some(v => v));
+}
+
+function csvRowToProject(row) {
+  // Parse portfolio (pode ser JSON array ou separado por ;)
+  let pf = [];
+  const pfRaw = row.portfolio || row.Portfolio || '';
+  try {
+    const parsed = JSON.parse(pfRaw);
+    if (Array.isArray(parsed)) pf = parsed;
+  } catch(e) {
+    pf = pfRaw.split(';').map(s => s.trim()).filter(Boolean);
+  }
+
+  // Parse areas
+  const area = (row.area || '').trim();
+  const areasSec = (row.areas_secundarias || '').split(';').map(s => s.trim()).filter(Boolean);
+  const areas = area ? [area, ...areasSec] : areasSec;
+
+  // Parse servicos_tipos
+  const st = (row.servicos_tipos || '').split(';').map(s => s.trim()).filter(Boolean);
+
+  return {
+    id: row.slug || '',
+    n: row.nome || '',
+    d: row.descricao || '',
+    o: row.objetivo || '',
+    u: (row.unidade || '').toUpperCase(),
+    a: areas,
+    st: st,
+    tp: parseInt(row.pessoas) || 0,
+    ts: parseInt(row.servicos) || 0,
+    or: parseFloat(row.orcamento) || 0,
+    pf: pf,
+    slug: row.slug || '',
+  };
+}
+
+// ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
-renderHeroStats();
-renderNav();
-renderCards();
+(async function init() {
+  // Tentar carregar do CSV
+  try {
+    const response = await fetch(CSV_URL);
+    if (response.ok) {
+      const text = await response.text();
+      const rows = loadCSVData(text);
+      if (rows.length > 0) {
+        PROJETOS = rows.map(csvRowToProject).filter(p => p.n);
+        console.log('[Portfolio] CSV carregado:', PROJETOS.length, 'projetos');
+      }
+    }
+  } catch(e) {
+    console.log('[Portfolio] Fallback para dados embarcados:', e.message);
+  }
+
+  renderHeroStats();
+  renderNav();
+  renderCards();
+})();
 </script>
 
 </body>
